@@ -1,0 +1,1845 @@
+openapi: 3.0.1
+info:
+  title: North Data API
+  description: Programmatic access to the North Data DB.
+  termsOfService: https://www.northdata.de/_agb
+  contact:
+    name: North Data Support
+    email: support@northdata.de
+  version: 1.126.10
+servers:
+- url: https://www.northdata.de/_api
+paths:
+  /company/v1/company:
+    get:
+      description: Retrieve a company.
+      parameters:
+      - name: name
+        in: query
+        description: company name
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: company address (you only need to specify the city)
+        schema:
+          type: string
+      - name: registerId
+        in: query
+        description: the ID of under which the company is registered, for example
+          HRB 12345
+        schema:
+          type: string
+      - name: registerCity
+        in: query
+        description: the city of the court where the company is registered, for example
+          Hamburg
+        schema:
+          type: string
+      - name: companyId
+        in: query
+        description: internal company id (do not store this id in an external database,
+          it may change over time)
+        schema:
+          type: string
+      - name: fuzzyMatch
+        in: query
+        description: true to find best match (similar name and nearby address)
+        schema:
+          type: boolean
+      - name: registerKey
+        in: query
+        description: key that has been provided via the register uniqueKey field
+        schema:
+          type: string
+      - name: history
+        in: query
+        description: true to include historical data
+        schema:
+          type: boolean
+      - name: financials
+        in: query
+        description: true to include financial data
+        schema:
+          type: boolean
+      - name: events
+        in: query
+        description: true to include event data
+        schema:
+          type: boolean
+      - name: eventTypes
+        in: query
+        description: restrict which event types wille be returned if events equals
+          true
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: maxEvents
+        in: query
+        description: maximum number of events to return
+        schema:
+          type: integer
+          format: int32
+      - name: relations
+        in: query
+        description: true to include related company and person data
+        schema:
+          type: boolean
+      - name: sheets
+        in: query
+        description: true to include company financial sheets (balance, earnings)
+        schema:
+          type: boolean
+      - name: extras
+        in: query
+        description: true to include extra company data provided by 3rd parties
+        schema:
+          type: boolean
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Company'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Company'
+  /company/v1/publications:
+    get:
+      description: Retrieve the publications associated with a company.
+      parameters:
+      - name: name
+        in: query
+        description: company name
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: company address (you only need to specify the city)
+        schema:
+          type: string
+      - name: registerId
+        in: query
+        description: the ID of under which the company is registered, for example
+          HRB 12345
+        schema:
+          type: string
+      - name: registerCity
+        in: query
+        description: the city of the court where the company is registered, for example
+          Hamburg
+        schema:
+          type: string
+      - name: companyId
+        in: query
+        description: internal company id (do not store this id in an external database,
+          it may change over time)
+        schema:
+          type: string
+      - name: fuzzyMatch
+        in: query
+        description: true to find best match (similar name and nearby address)
+        schema:
+          type: boolean
+      - name: registerKey
+        in: query
+        description: key that has been provided via the register uniqueKey field
+        schema:
+          type: string
+      - name: sources
+        in: query
+        description: restrict which sources are allowed for the returned publications
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicationSource'
+      - name: content
+        in: query
+        description: whether to include publication text / html (may significantly
+          slow down response)
+        schema:
+          type: boolean
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: offset
+        in: query
+        description: offset of first item to return
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /person/v1/person:
+    get:
+      description: Retrieve a person.
+      parameters:
+      - name: firstName
+        in: query
+        description: first name(s) of a person
+        schema:
+          type: string
+      - name: lastName
+        in: query
+        description: last name of a person
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: person address (you only need to specify the city)
+        schema:
+          type: string
+      - name: birthDate
+        in: query
+        description: birth date
+        schema:
+          type: string
+          format: date
+      - name: personId
+        in: query
+        description: internal person id (do not store this id in an external database,
+          it may change over time)
+        schema:
+          type: string
+      - name: history
+        in: query
+        description: true to include historical data
+        schema:
+          type: boolean
+      - name: relations
+        in: query
+        description: true to include related company data
+        schema:
+          type: boolean
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Person'
+  /person/v1/publications:
+    get:
+      description: Retrieve the publications associated with a person.
+      parameters:
+      - name: firstName
+        in: query
+        description: first name(s) of a person
+        schema:
+          type: string
+      - name: lastName
+        in: query
+        description: last name of a person
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: person address (you only need to specify the city)
+        schema:
+          type: string
+      - name: birthDate
+        in: query
+        description: birth date
+        schema:
+          type: string
+          format: date
+      - name: personId
+        in: query
+        description: internal person id (do not store this id in an external database,
+          it may change over time)
+        schema:
+          type: string
+      - name: sources
+        in: query
+        description: restrict which sources are allowed for the returned publications
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicationSource'
+      - name: content
+        in: query
+        description: whether to include publication text / html (may significantly
+          slow down response)
+        schema:
+          type: boolean
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: offset
+        in: query
+        description: offset of first item to return
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /pub/v1/publications:
+    get:
+      description: Retrieve publications. At most 10 publications are returned with
+        each call. For more, repeat the call setting the pos parameter to the newPos
+        attribute value of the response.
+      parameters:
+      - name: minTimestamp
+        in: query
+        description: minimum datetime publication was added to the database
+        schema:
+          type: string
+          format: date-time
+      - name: maxTimestamp
+        in: query
+        description: maximum datetime publication was added to the database
+        schema:
+          type: string
+          format: date-time
+      - name: minDate
+        in: query
+        description: DEPRECATED - please use minTimestamp instead
+        schema:
+          type: string
+          format: date
+      - name: maxDate
+        in: query
+        description: DEPRECATED - please use maxTimestamp instead
+        schema:
+          type: string
+          format: date
+      - name: sources
+        in: query
+        description: restrict which sources are allowed for the returned publications
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/PublicationSource'
+      - name: content
+        in: query
+        description: whether to include publication text / html (may significantly
+          slow down response)
+        schema:
+          type: boolean
+      - name: publisherHistory
+        in: query
+        description: true to include historical data for the publisher
+        schema:
+          type: boolean
+      - name: publisherFinancials
+        in: query
+        description: true to include financial data for the publisher
+        schema:
+          type: boolean
+      - name: publisherRelations
+        in: query
+        description: true to include related company and person data for the publisher
+        schema:
+          type: boolean
+      - name: publisherEvents
+        in: query
+        description: true to include event data for the publisher
+        schema:
+          type: boolean
+      - name: publisherExtras
+        in: query
+        description: true to include extra publisher data provided by 3rd parties
+        schema:
+          type: boolean
+      - name: publisherSheets
+        in: query
+        description: true to include publisher sheets (balance, earnings)
+        schema:
+          type: boolean
+      - name: pos
+        in: query
+        description: if additional results shall be downloaded, set this to the value
+          of the newPos attribute of the previous response
+        schema:
+          type: string
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/GenericResponse'
+  /search/v1/universal:
+    get:
+      description: 'universal search: provides best company and person matches for
+        given input query'
+      parameters:
+      - name: query
+        in: query
+        description: the query string
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: query
+        description: set to "company" for companies only, "person" for persons only,
+          otherwise leave empty
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: list of valid statuses (active, terminated, liquidation)
+        schema:
+          type: string
+      - name: pos
+        in: query
+        description: if additional results shall be downloaded, set this to the value
+          of the newPos attribute of the previous response
+        schema:
+          type: string
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: offset
+        in: query
+        description: offset of first item to return
+        schema:
+          type: integer
+          format: int32
+      - name: limit
+        in: query
+        description: maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      - name: history
+        in: query
+        description: true to include historical data
+        schema:
+          type: boolean
+      - name: financials
+        in: query
+        description: true to include financial data
+        schema:
+          type: boolean
+      - name: events
+        in: query
+        description: true to include event data
+        schema:
+          type: boolean
+      - name: eventTypes
+        in: query
+        description: restrict which event types wille be returned if events equals
+          true
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: maxEvents
+        in: query
+        description: maximum number of events to return
+        schema:
+          type: integer
+          format: int32
+      - name: relations
+        in: query
+        description: true to include related company and person data
+        schema:
+          type: boolean
+      - name: sheets
+        in: query
+        description: true to include company financial sheets (balance, earnings)
+        schema:
+          type: boolean
+      - name: extras
+        in: query
+        description: true to include extra company data provided by 3rd parties
+        schema:
+          type: boolean
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /search/v1/suggest:
+    get:
+      description: 'auto complete: provides quick company and person suggestions for
+        given input query'
+      parameters:
+      - name: query
+        in: query
+        description: the query string
+        required: true
+        schema:
+          type: string
+      - name: domain
+        in: query
+        description: '"company" to match companies only, "person" to match persons
+          only, empty to match all'
+        schema:
+          type: string
+      - name: history
+        in: query
+        description: true to include former company names
+        schema:
+          type: boolean
+      - name: status
+        in: query
+        description: list of valid statuses (active, terminated, liquidation)
+        schema:
+          type: string
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+  /search/v1/power:
+    get:
+      description: 'power search: supports geo and financial criteria'
+      parameters:
+      - name: name
+        in: query
+        description: company name or empty
+        schema:
+          type: string
+      - name: description
+        in: query
+        description: wz code or keywords to match in the company's subject
+        schema:
+          type: string
+      - name: address
+        in: query
+        description: address or geo coordinates
+        schema:
+          type: string
+      - name: maxDistanceKm
+        in: query
+        description: maximum distance from given address
+        schema:
+          type: number
+          format: double
+      - name: legalForm
+        in: query
+        description: list of legal forms
+        schema:
+          type: string
+      - name: financialId
+        in: query
+        description: list of financial ids for financial filtering (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
+      - name: lowerBound
+        in: query
+        description: list of lower bounds for financial filterings  (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - name: upperBound
+        in: query
+        description: list of upper bounds for financial filterings  (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: number
+            format: double
+      - name: eventType
+        in: query
+        description: list of event types for event filtering (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
+      - name: minDate
+        in: query
+        description: list of minimum dates for event filterings  (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+      - name: maxDate
+        in: query
+        description: list of maximum dates for event filterings  (see user guide)
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
+            format: date
+      - name: status
+        in: query
+        description: list of valid statuses (active, terminated, liquidation)
+        schema:
+          type: string
+      - name: history
+        in: query
+        description: true to include historical data
+        schema:
+          type: boolean
+      - name: financials
+        in: query
+        description: true to include financial data
+        schema:
+          type: boolean
+      - name: events
+        in: query
+        description: true to include event data
+        schema:
+          type: boolean
+      - name: eventTypes
+        in: query
+        description: restrict which event types wille be returned if events equals
+          true
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventType'
+      - name: maxEvents
+        in: query
+        description: maximum number of events to return
+        schema:
+          type: integer
+          format: int32
+      - name: relations
+        in: query
+        description: true to include related company and person data
+        schema:
+          type: boolean
+      - name: sheets
+        in: query
+        description: true to include company financial sheets (balance, earnings)
+        schema:
+          type: boolean
+      - name: extras
+        in: query
+        description: true to include extra company data provided by 3rd parties
+        schema:
+          type: boolean
+      - name: pos
+        in: query
+        description: if additional results shall be downloaded, set this to the value
+          of the newPos attribute of the previous response
+        schema:
+          type: string
+      - name: censor
+        in: query
+        description: should be set when presenting the content on a public website
+        schema:
+          type: boolean
+      - name: limit
+        in: query
+        description: maximum number of items to return
+        schema:
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SearchResults'
+components:
+  schemas:
+    Company:
+      title: Company
+      required:
+      - address
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: internal company id (do not store this id in an external database,
+            it may change over time)
+        name:
+          $ref: '#/components/schemas/CompanyName'
+        address:
+          $ref: '#/components/schemas/Address'
+        register:
+          $ref: '#/components/schemas/Register'
+        subject:
+          type: string
+          description: subject according to register filing (Unternehmensgegenstand)
+        northDataUrl:
+          type: string
+          description: North data web page for this company
+        terminated:
+          type: boolean
+          description: company has been terminated
+        status:
+          type: string
+          description: current status of the company, where liquidation is the intermediate
+            state before the final removal from the register (=terminated)
+          enum:
+          - active
+          - liquidation
+          - terminated
+        history:
+          $ref: '#/components/schemas/CompanyHistory'
+        financials:
+          $ref: '#/components/schemas/Financials'
+        events:
+          $ref: '#/components/schemas/Events'
+        extras:
+          type: array
+          description: extra data provided by 3rd parties
+          items:
+            $ref: '#/components/schemas/Extras'
+        sheets:
+          type: array
+          description: company's financial sheets (such as balance and earnings sheets)
+          items:
+            $ref: '#/components/schemas/Sheet'
+        relatedCompanies:
+          $ref: '#/components/schemas/Relations'
+        relatedPersons:
+          $ref: '#/components/schemas/Relations'
+        blocked:
+          type: boolean
+          description: company data should not be publicly on the Internet because
+            of a request for privacy protection
+      description: All data for a particular company
+    CompanyName:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+          description: name of a company
+        legalForm:
+          type: string
+          description: 'legal form (one of: A/S, AG, AG & Co. KG, AöR, Co. KG, d.o.o.,
+            e. K., e. V., eG, EWIV, gAG, GbR, gGmbH, GmbH, GmbH & Co. KG, gSE, gUG,
+            Inh., InvAG, KG, KGaA, KGaA & Co. KG, Ltd., Ltd. & Co. KG, OHG, PartGG,
+            plc, REITG, S.L., SCE, SCE, SCE mbH, SE, SE & Co. KG, Stiftung & Co. KG,
+            UG, UG & Co. KG, VVaG)'
+    Register:
+      required:
+      - id
+      type: object
+      properties:
+        city:
+          type: string
+          description: city of the register court (e.g. Hamburg)
+        id:
+          type: string
+          description: ID of the register filing (e.g. HRB 9999)
+        uniqueKey:
+          type: string
+          description: unique numerical key for repeatably unique identification of
+            the register entry
+      description: register entry information (e.g., Amtsgericht Hamburg HRB 9999)
+    Filing:
+      required:
+      - id
+      type: object
+      properties:
+        name:
+          type: string
+          description: complete string
+        source:
+          $ref: '#/components/schemas/PublicationSource'
+        city:
+          type: string
+          description: city of the register court (e.g. Charlottenburg)
+        id:
+          type: string
+          description: ID of the court filing (e.g., 36w IN 3284/16)
+      description: Court Filing (e.g., Insolvenzgericht Charlottenburg 36w IN 3284/16)
+    Address:
+      required:
+      - city
+      - country
+      type: object
+      properties:
+        street:
+          type: string
+          description: street and house number
+        postalCode:
+          type: string
+          description: postal code
+        city:
+          type: string
+          description: city
+        state:
+          type: string
+          description: state
+        country:
+          type: string
+          description: two-letter ISO country code
+        lat:
+          type: number
+          description: geo coordinates, latitude part
+          format: double
+        lng:
+          type: number
+          description: geo coordinates, longitude part
+          format: double
+        formattedValue:
+          type: string
+          description: the whole address in one human readable string
+    CompanyNameHistoryItem:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          $ref: '#/components/schemas/CompanyName'
+        date:
+          type: string
+          description: since when the referred company name is (known to be) in use
+          format: date
+    AddressHistoryItem:
+      required:
+      - address
+      type: object
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        date:
+          type: string
+          description: since when the referred address is (known to be) in use
+          format: date
+    RegisterHistoryItem:
+      required:
+      - register
+      type: object
+      properties:
+        register:
+          $ref: '#/components/schemas/Register'
+        date:
+          type: string
+          description: since when this registry entry is valid
+          format: date
+    CompanyHistory:
+      type: object
+      properties:
+        names:
+          type: array
+          description: name history of a company
+          items:
+            $ref: '#/components/schemas/CompanyNameHistoryItem'
+        addresses:
+          type: array
+          description: adress history of a company
+          items:
+            $ref: '#/components/schemas/AddressHistoryItem'
+        registers:
+          type: array
+          description: register entry history of a company
+          items:
+            $ref: '#/components/schemas/RegisterHistoryItem'
+        financials:
+          type: array
+          description: historical financial data
+          items:
+            $ref: '#/components/schemas/Financials'
+    Events:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          description: the list of events
+          items:
+            $ref: '#/components/schemas/Event'
+      description: list of events
+    Event:
+      type: object
+      properties:
+        type:
+          type: string
+          description: one of ...
+        date:
+          type: string
+          description: when it happened
+          format: date
+        description:
+          type: string
+          description: human-readable description of what happend
+      description: event
+    Financials:
+      required:
+      - consolidated
+      - date
+      - formattedDate
+      - items
+      type: object
+      properties:
+        date:
+          type: string
+          description: reference date
+          format: date
+        formattedDate:
+          type: string
+          description: date formatted as a german string
+        consolidated:
+          type: boolean
+          description: true if the financial data refer to a consolidated balance
+            (Konzernabschluss)
+        source:
+          $ref: '#/components/schemas/FinancialsSource'
+        items:
+          type: array
+          description: list of financial numbers (maybe empty. If empty, see note
+            for the reason)
+          items:
+            $ref: '#/components/schemas/Financial'
+        note:
+          $ref: '#/components/schemas/FinancialsNote'
+      description: financial data
+    Financial:
+      required:
+      - formattedValue
+      - id
+      - name
+      - value
+      type: object
+      properties:
+        id:
+          type: string
+          description: type of number (for example, revenue). Please see the document
+            Finanz-Kennzahlentabelle for a complete list
+        name:
+          type: string
+          description: name in German language (for example, Umsatz)
+        value:
+          type: number
+          description: actual value
+          format: double
+        unit:
+          type: string
+          description: unit or currency (EUR, % or empty)
+        note:
+          type: string
+          description: optional note or comment with respect to the calculation of
+            the financial
+        formattedValue:
+          type: string
+          description: value formatted as a string (German number formatting conventions)
+      description: single financial number
+    FinancialsSource:
+      required:
+      - publicationDate
+      - publicationTitle
+      type: object
+      properties:
+        publicationId:
+          type: string
+          description: internal publication ID
+        publicationTitle:
+          type: string
+          description: publication title such as "Jahresabschluss 2015"
+        publicationDate:
+          type: string
+          description: date the publication was published
+          format: date
+        auditorName:
+          type: string
+          description: name of auditing company
+        snippets:
+          type: array
+          description: excerpts from the original publication containing the financial
+            data
+          items:
+            $ref: '#/components/schemas/SourceSnippet'
+      description: source of financial data
+    FinancialsNote:
+      required:
+      - html
+      - text
+      type: object
+      properties:
+        text:
+          type: string
+          description: explanation as plain text
+        html:
+          type: string
+          description: explanation as html
+      description: additional explanation of financials (or of their absence)
+    SourceSnippet:
+      required:
+      - content
+      - title
+      type: object
+      properties:
+        title:
+          type: string
+          description: title
+        content:
+          type: string
+          description: text
+        contentType:
+          type: string
+          description: content format, usually "text/html"
+      description: excerpts from an original publication
+    Extras:
+      type: object
+      properties:
+        sourceName:
+          type: string
+          description: name of the source
+        sourceUrl:
+          type: string
+          description: url of the source
+        items:
+          type: array
+          description: extra data items in this set
+          items:
+            $ref: '#/components/schemas/Extra'
+      description: set of additional data, typically provided by 3rd parties.
+    Extra:
+      required:
+      - formattedHtmlValue
+      - id
+      - name
+      - value
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'common ids are: email, url, phone, fax, vatId, wz'
+        name:
+          type: string
+          description: describing name in German language (for example, "E-Mail")
+        value:
+          type: string
+          description: actual value
+        formattedHtmlValue:
+          type: string
+          description: value formatted as an HTML string
+      description: extra data item, typically provided by a 3rd party.
+    Publication:
+      required:
+      - date
+      - id
+      - source
+      - title
+      type: object
+      properties:
+        id:
+          type: string
+          description: interne ID
+        date:
+          type: string
+          description: publishing date
+          format: date
+        source:
+          $ref: '#/components/schemas/PublicationSource'
+        sourceName:
+          type: string
+          description: full name of source
+        category:
+          type: string
+          description: category under which publication was filed in the original
+            source
+        originalLanguage:
+          type: string
+          description: ISO language code
+        language:
+          type: string
+          description: ISO language code. This is different from the original language,
+            for translations only.
+        title:
+          type: string
+          description: title of publication
+        northDataUrl:
+          type: string
+          description: North data web page for this publication
+        text:
+          type: string
+          description: raw text of the publication
+        html:
+          type: string
+          description: text of publication in HTML format
+        publisher:
+          $ref: '#/components/schemas/Company'
+        structure:
+          $ref: '#/components/schemas/PublicationStructure'
+        mentionedCompanies:
+          $ref: '#/components/schemas/Relations'
+        mentionedPersons:
+          $ref: '#/components/schemas/Relations'
+        filings:
+          type: array
+          description: 'court filings (currently only: insolvency filings)'
+          items:
+            $ref: '#/components/schemas/Filing'
+        blocked:
+          type: boolean
+          description: publication data should not be publicly on the Internet because
+            of a request for privacy protection
+        internal:
+          type: object
+          properties: {}
+          description: additional data used for internal purposes
+    Topic:
+      required:
+      - name
+      - type
+      type: object
+      properties:
+        name:
+          type: string
+          description: German description (e.g., "Stammkapital")
+        value:
+          type: string
+          description: accompanying value (e.g., €100.000,-)
+        type:
+          type: string
+          description: internal identificator for the topic
+          enum:
+          - Entry
+          - Continuation
+          - Name
+          - Headquarters
+          - Address
+          - Capital
+          - Subject
+          - Contract
+          - Statute
+          - LegalForm
+          - Proxy
+          - ListOfBoardMembers
+          - ConvertibleBonds
+          - Liquidation
+          - Exit
+          - Aufhebung
+          - Verguetung
+          - AnkuendigungRestschuldbefreiung
+          - Restschuldbefreiung
+          - EinstellungMangelsMasse
+          - Eroeffnung
+          - Masseunzulänglichkeit
+          - Pruefungstermin
+          - Schlusstermin
+          - VerteilungsVerzeichnis
+          - AbweisungMangelsMasse
+          - TreuhaenderBestimmung
+          - Insolvenzverwalter
+          - VorlaufigerInsolvenzverwalter
+          - Sicherungsmassnahme
+          - InsolvenzSonstiges
+      description: topic of a publication
+    PublicationStructure:
+      type: object
+      properties:
+        topics:
+          type: array
+          description: topics of the publication
+          items:
+            $ref: '#/components/schemas/Topic'
+      description: result of the structural analysis of a publication
+    PublicationSource:
+      type: string
+      description: |
+        Source identifier:
+          * Hrb - Handelsregisterbekanntmachungen
+          * Eb - Elektronischer Bundesanzeiger
+          * Ins - Insolvenzbekanntmachungen
+          * Ut - Unternehmensträger (Handelsregister)
+          * Fk - Förderkatalog
+          * Nd - North Data (manual corrections and bug fixes)
+      enum:
+      - Hrb
+      - Eb
+      - Ins
+      - Ut
+      - Nd
+      - Fk
+    EventType:
+      type: string
+      description: event type
+    Relation:
+      required:
+      - roles
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        person:
+          $ref: '#/components/schemas/Person'
+        roles:
+          type: array
+          description: description of the type of the relation
+          items:
+            $ref: '#/components/schemas/Role'
+      description: relation of a company or person to another company or person
+    Relations:
+      required:
+      - items
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relation'
+      description: list of related companies / persons
+    Role:
+      required:
+      - group
+      - name
+      - type
+      type: object
+      properties:
+        date:
+          type: string
+          description: date
+          format: date
+        name:
+          type: string
+          description: German description
+        demotion:
+          type: boolean
+          description: true if the relation ends at the given date (e.g., "Aussscheiden
+            eines Geschäftsführers")
+        announce:
+          type: boolean
+          description: true if the relation might be preliminary ("Ankündigung")
+        type:
+          type: string
+          description: internal identifier
+          enum:
+          - Publisher
+          - Umwandlung
+          - Sitzverlegung
+          - Hgb264
+          - Komplementaer
+          - Beherrschung
+          - Gewinnnabfuehrung
+          - Teilgewinnnabfuehrung
+          - Gewinngemeinschaft
+          - Betriebspacht
+          - Betriebsueberlassung
+          - Uebernahme
+          - Verschmolzen
+          - Ausgliederung
+          - Abspaltung
+          - Inhaber
+          - Paechter
+          - PersoenlichHaftenderGesellschafter
+          - Vorstandsvorsitzender
+          - Vorstand
+          - Geschaeftsfuehrer
+          - StellvertretenderGeschaeftsfuehrer
+          - GeschaeftsfuehrenderDirektor
+          - Notgeschaeftsfuehrer
+          - StaendigerVertreter
+          - Partner
+          - Director
+          - Liquidator
+          - Aufsichtsrat
+          - Prokura
+          - Handelnd
+          - Unknown
+        group:
+          type: string
+          description: internal group identifier
+          enum:
+          - Succession
+          - Control
+          - Merger
+          - Personal
+          - Other
+        dir:
+          type: string
+          description: Direction. The exact interpretation depends of the value of
+            the field "group". Case "succession" - older company is "Source". Case
+            "merger" - Sold company is "Source", Buyer is target "Target". Case "control"
+            - controlling company is "Source".
+          enum:
+          - None
+          - Source
+          - Target
+          - Bi
+      description: description of the type of a relation
+    PersonName:
+      required:
+      - lastName
+      type: object
+      properties:
+        firstName:
+          type: string
+          description: first name(s)
+        lastName:
+          type: string
+          description: last name
+        title:
+          type: string
+          description: title
+    Person:
+      required:
+      - id
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: internal person id (do not store this id in an external database,
+            it may change over time)
+        name:
+          $ref: '#/components/schemas/PersonName'
+        address:
+          $ref: '#/components/schemas/Address'
+        birthDate:
+          type: string
+          description: Birth date
+          format: date
+        birthYear:
+          type: integer
+          description: Sometimes only the birth years is known, but not the exact
+            date
+          format: int32
+        deceased:
+          type: boolean
+          description: person is known to be dead
+        northDataUrl:
+          type: string
+          description: North data web page for this person
+        relatedCompanies:
+          $ref: '#/components/schemas/Relations'
+        blocked:
+          type: boolean
+          description: person data should not be publicly on the Internet because
+            of a request for privacy protection
+    GenericResponse:
+      type: object
+      properties:
+        newPos:
+          type: string
+        publications:
+          type: array
+          items:
+            $ref: '#/components/schemas/Publication'
+    SearchResults:
+      type: object
+      properties:
+        results:
+          type: array
+          description: list of results
+          items:
+            $ref: '#/components/schemas/SearchResult'
+        censored:
+          type: boolean
+          description: true if results have been omitted because of censoring
+        offset:
+          type: integer
+          description: offset of result array in all results
+          format: int32
+        nextOffset:
+          type: integer
+          description: offset to retrieve next batch of results
+          format: int32
+        nextPos:
+          type: string
+          description: position to retrieve next batch of results
+        total:
+          type: integer
+          description: total number of results (usually, this number is not available,
+            unfortunately)
+          format: int32
+      description: search results
+    SearchResult:
+      type: object
+      properties:
+        company:
+          $ref: '#/components/schemas/Company'
+        person:
+          $ref: '#/components/schemas/Person'
+        publication:
+          $ref: '#/components/schemas/Publication'
+        matchedName:
+          type: string
+          description: the matched name (useful if a company has been renamed)
+      description: company, person or publication that is result of a search
+    Money:
+      required:
+      - amount
+      - currency
+      - formattedValue
+      type: object
+      properties:
+        currency:
+          type: string
+          description: currency (three-letter code)
+        amount:
+          type: number
+          description: amount as a number
+          format: double
+        formattedValue:
+          type: string
+          description: amount and currency formatted as a human-readable string
+      description: amount and currency
+    Product:
+      required:
+      - id
+      - name
+      - price
+      type: object
+      properties:
+        id:
+          type: string
+          description: string to identify a product when ordering for download
+        name:
+          type: string
+          description: name of the product
+        date:
+          type: string
+          description: publishing date
+          format: date
+        price:
+          $ref: '#/components/schemas/Money'
+      description: a publication that can be bought and downloaded
+    Order:
+      type: object
+      properties:
+        id:
+          type: string
+          description: string to identify the order
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItem'
+      description: result of an order
+    OrderItem:
+      required:
+      - status
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        status:
+          type: string
+          description: whether the publication is ready for download
+          enum:
+          - waiting
+          - ready
+          - unavailable
+        url:
+          type: string
+          description: url to download from (when the status is 'ready')
+        contentType:
+          type: string
+          description: mime type
+      description: information whether and where a product maybe downloaded
+    Sheet:
+      required:
+      - columnHeaders
+      - consolidated
+      - rows
+      - type
+      type: object
+      properties:
+        columnHeaders:
+          type: array
+          description: list of column headers
+          items:
+            $ref: '#/components/schemas/SheetColumnHeader'
+        rows:
+          type: array
+          description: list of rows
+          items:
+            $ref: '#/components/schemas/SheetRow'
+        type:
+          type: string
+          description: the kind of financial data reported in this sheet
+          enum:
+          - balance
+          - earnings
+          - cashflow
+        consolidated:
+          type: boolean
+          description: true if the financial is consolidated (including dependent
+            companies) or not (excluding)
+        reporting:
+          type: string
+          description: the reporting standard used
+          enum:
+          - HGB
+          - IFRS
+          - GAAP
+        unit:
+          type: string
+          description: unit or currency (EUR, % or empty)
+      description: represents balance sheets, profit and loss statements, and similar
+        structures
+    SheetColumnHeader:
+      required:
+      - date
+      type: object
+      properties:
+        date:
+          type: string
+          description: the date of entries in this column
+          format: date
+        source:
+          $ref: '#/components/schemas/FinancialsSource'
+      description: column header of a sheet
+    SheetRow:
+      required:
+      - cells
+      - name
+      type: object
+      properties:
+        name:
+          type: string
+        level:
+          type: integer
+          description: if the sheet is structured as a tree, indicates the depth of
+            the nesting of this row.
+          format: int32
+        cells:
+          type: array
+          description: list of cells
+          items:
+            $ref: '#/components/schemas/SheetCell'
+      description: row of a sheet
+    SheetCell:
+      type: object
+      properties:
+        value:
+          type: number
+          description: numeric value
+          format: double
+      description: cell of a sheet
+  parameters:
+    companyName:
+      name: name
+      in: query
+      description: company name
+      schema:
+        type: string
+    companyAddress:
+      name: address
+      in: query
+      description: company address (you only need to specify the city)
+      schema:
+        type: string
+    companyRegisterCity:
+      name: registerCity
+      in: query
+      description: the city of the court where the company is registered, for example
+        Hamburg
+      schema:
+        type: string
+    companyRegisterId:
+      name: registerId
+      in: query
+      description: the ID of under which the company is registered, for example HRB
+        12345
+      schema:
+        type: string
+    companyId:
+      name: companyId
+      in: query
+      description: internal company id (do not store this id in an external database,
+        it may change over time)
+      schema:
+        type: string
+    fuzzyMatch:
+      name: fuzzyMatch
+      in: query
+      description: true to find best match (similar name and nearby address)
+      schema:
+        type: boolean
+    registerKey:
+      name: registerKey
+      in: query
+      description: key that has been provided via the register uniqueKey field
+      schema:
+        type: string
+    personFirstName:
+      name: firstName
+      in: query
+      description: first name(s) of a person
+      schema:
+        type: string
+    personLastName:
+      name: lastName
+      in: query
+      description: last name of a person
+      schema:
+        type: string
+    personAddress:
+      name: address
+      in: query
+      description: person address (you only need to specify the city)
+      schema:
+        type: string
+    birthDate:
+      name: birthDate
+      in: query
+      description: birth date
+      schema:
+        type: string
+        format: date
+    personId:
+      name: personId
+      in: query
+      description: internal person id (do not store this id in an external database,
+        it may change over time)
+      schema:
+        type: string
+    sources:
+      name: sources
+      in: query
+      description: restrict which sources are allowed for the returned publications
+      style: pipeDelimited
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/PublicationSource'
+    content:
+      name: content
+      in: query
+      description: whether to include publication text / html (may significantly slow
+        down response)
+      schema:
+        type: boolean
+    censor:
+      name: censor
+      in: query
+      description: should be set when presenting the content on a public website
+      schema:
+        type: boolean
+    offset:
+      name: offset
+      in: query
+      description: offset of first item to return
+      schema:
+        type: integer
+        format: int32
+    limit:
+      name: limit
+      in: query
+      description: maximum number of items to return
+      schema:
+        type: integer
+        format: int32
+    pos:
+      name: pos
+      in: query
+      description: if additional results shall be downloaded, set this to the value
+        of the newPos attribute of the previous response
+      schema:
+        type: string
+    output:
+      name: output
+      in: query
+      description: response format
+      schema:
+        type: string
+        enum:
+        - json
+        - xml
+        default: json
+    history:
+      name: history
+      in: query
+      description: true to include historical data
+      schema:
+        type: boolean
+    financials:
+      name: financials
+      in: query
+      description: true to include financial data
+      schema:
+        type: boolean
+    events:
+      name: events
+      in: query
+      description: true to include event data
+      schema:
+        type: boolean
+    eventTypes:
+      name: eventTypes
+      in: query
+      description: restrict which event types wille be returned if events equals true
+      style: pipeDelimited
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/EventType'
+    maxEvents:
+      name: maxEvents
+      in: query
+      description: maximum number of events to return
+      schema:
+        type: integer
+        format: int32
+    relations:
+      name: relations
+      in: query
+      description: true to include related company and person data
+      schema:
+        type: boolean
+    status:
+      name: status
+      in: query
+      description: list of valid statuses (active, terminated, liquidation)
+      schema:
+        type: string
+    sheets:
+      name: sheets
+      in: query
+      description: true to include company financial sheets (balance, earnings)
+      schema:
+        type: boolean
+    extras:
+      name: extras
+      in: query
+      description: true to include extra company data provided by 3rd parties
+      schema:
+        type: boolean

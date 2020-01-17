@@ -1,0 +1,1270 @@
+swagger: '2.0'
+info:
+  version: 1.126.10
+  title: North Data API
+  description: Programmatic access to the North Data DB.
+  termsOfService: https://www.northdata.de/_agb
+  contact:
+    name: North Data Support
+    email: support@northdata.de
+ # externalDocs:
+  # description: User Guide
+  # url: https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md
+host: www.northdata.de
+basePath: /_api
+schemes:
+  - https
+produces:
+  - application/json
+  - application/xml
+paths:
+  /company/v1/company:
+    get:
+      description: Retrieve a company.
+      parameters:
+        - $ref: '#/parameters/companyName'
+        - $ref: '#/parameters/companyAddress'
+        - $ref: '#/parameters/companyRegisterId'
+        - $ref: '#/parameters/companyRegisterCity'
+        - $ref: '#/parameters/companyId'
+        - $ref: '#/parameters/fuzzyMatch'
+        - $ref: '#/parameters/registerKey'
+        - $ref: '#/parameters/history'
+        - $ref: '#/parameters/financials'
+        - $ref: '#/parameters/events'
+        - $ref: '#/parameters/eventTypes'
+        - $ref: '#/parameters/maxEvents'
+        - $ref: '#/parameters/relations'
+        - $ref: '#/parameters/sheets'
+        - $ref: '#/parameters/extras'
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/Company'
+  /company/v1/publications:
+    get:
+      description: Retrieve the publications associated with a company.
+      parameters:
+        - $ref: '#/parameters/companyName'
+        - $ref: '#/parameters/companyAddress'
+        - $ref: '#/parameters/companyRegisterId'
+        - $ref: '#/parameters/companyRegisterCity'
+        - $ref: '#/parameters/companyId'
+        - $ref: '#/parameters/fuzzyMatch'
+        - $ref: '#/parameters/registerKey'
+        - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/content'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/GenericResponse'
+  /person/v1/person:
+    get:
+      description: Retrieve a person.
+      parameters:
+        - $ref: '#/parameters/personFirstName'
+        - $ref: '#/parameters/personLastName'
+        - $ref: '#/parameters/personAddress'
+        - $ref: '#/parameters/birthDate'
+        - $ref: '#/parameters/personId'
+        - name: history 
+          description: true to include historical data
+          in: query
+          required: false
+          type: boolean
+        - name: relations
+          description: true to include related company data
+          in: query
+          required: false
+          type: boolean
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/Person'
+  /person/v1/publications:
+    get:
+      description: Retrieve the publications associated with a person.
+      parameters:
+        - $ref: '#/parameters/personFirstName'
+        - $ref: '#/parameters/personLastName'
+        - $ref: '#/parameters/personAddress'
+        - $ref: '#/parameters/birthDate'
+        - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/content'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/GenericResponse'
+  /pub/v1/publications:
+    get:
+      description: Retrieve publications. At most 10 publications are returned with each call. For more, repeat the call setting the pos parameter to the newPos attribute value of the response.
+      parameters:
+        - name: minTimestamp
+          description: minimum datetime publication was added to the database
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: maxTimestamp
+          description: maximum datetime publication was added to the database
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: minDate
+          description: DEPRECATED - please use minTimestamp instead
+          in: query
+          required: false
+          type: string
+          format: date
+        - name: maxDate
+          description: DEPRECATED - please use maxTimestamp instead
+          in: query
+          required: false
+          type: string
+          format: date
+        - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/content'
+        - name: publisherHistory
+          description: true to include historical data for the publisher
+          in: query
+          required: false
+          type: boolean
+        - name: publisherFinancials
+          description: true to include financial data for the publisher
+          in: query
+          required: false
+          type: boolean
+        - name: publisherRelations
+          description: true to include related company and person data for the publisher
+          in: query
+          required: false
+          type: boolean
+        - name: publisherEvents
+          description: true to include event data for the publisher
+          in: query
+          required: false
+          type: boolean
+        - name: publisherExtras
+          description: true to include extra publisher data provided by 3rd parties
+          in: query
+          required: false
+          type: boolean
+        - name: publisherSheets
+          description: true to include publisher sheets (balance, earnings)
+          in: query
+          required: false
+          type: boolean
+        - $ref: '#/parameters/pos'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/output'          
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/GenericResponse'
+  /search/v1/universal:
+    get:
+      description: 'universal search: provides best company and person matches for given input query'
+      parameters:
+        - name: query
+          description: the query string
+          in: query
+          required: true
+          type: string
+        - name: domain
+          description: 'set to "company" for companies only, "person" for persons only, otherwise leave empty'
+          in: query
+          required: false
+          type: string
+        - $ref: '#/parameters/status'
+        - $ref: '#/parameters/pos'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/offset'
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/output'
+        - $ref: '#/parameters/history'
+        - $ref: '#/parameters/financials'
+        - $ref: '#/parameters/events'
+        - $ref: '#/parameters/eventTypes'
+        - $ref: '#/parameters/maxEvents'
+        - $ref: '#/parameters/relations'
+        - $ref: '#/parameters/sheets'
+        - $ref: '#/parameters/extras'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/SearchResults'
+  /search/v1/suggest:
+    get:
+      description: 'auto complete: provides quick company and person suggestions for given input query'
+      parameters:
+        - name: query
+          description: the query string
+          in: query
+          required: true
+          type: string
+        - name: domain
+          in: query
+          required: false
+          type: string
+          description: '"company" to match companies only, "person" to match persons only, empty to match all'
+        - name: history
+          in: query
+          required: false
+          type: boolean
+          description: true to include former company names
+        - $ref: '#/parameters/status'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/SearchResults'
+  /search/v1/power:
+    get:
+      description: 'power search: supports geo and financial criteria'
+      parameters:
+        - name: 'name'
+          description: 'company name or empty'
+          required: false
+          type: string
+          in: query
+        - name: 'description'
+          description: wz code or keywords to match in the company's subject
+          required: false
+          type: string
+          in: query
+        - name: address
+          description: address or geo coordinates
+          required: false
+          type: string
+          in: query
+        - name: maxDistanceKm
+          description: maximum distance from given address
+          required: false
+          type: number
+          format: double
+          in: query
+        - name: legalForm
+          description: list of legal forms
+          required: false
+          type: string
+          in: query
+          collectionFormat: pipes
+          items:
+            type: string
+        - name: financialId
+          description: list of financial ids for financial filtering (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: string
+        - name: lowerBound
+          description: list of lower bounds for financial filterings  (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: number
+            format: double
+        - name: upperBound
+          description: list of upper bounds for financial filterings  (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: number
+            format: double
+        - name: eventType
+          description: list of event types for event filtering (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: string
+        - name: minDate
+          description: list of minimum dates for event filterings  (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: string
+            format: date
+        - name: maxDate
+          description: list of maximum dates for event filterings  (see user guide)
+          required: false
+          type: array
+          in: query
+          collectionFormat: pipes
+          items:
+            type: string
+            format: date
+        - $ref: '#/parameters/status'
+        - $ref: '#/parameters/history'
+        - $ref: '#/parameters/financials'
+        - $ref: '#/parameters/events'
+        - $ref: '#/parameters/eventTypes'
+        - $ref: '#/parameters/maxEvents'
+        - $ref: '#/parameters/relations'
+        - $ref: '#/parameters/sheets'
+        - $ref: '#/parameters/extras'
+        - $ref: '#/parameters/pos'
+        - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/limit'
+        - $ref: '#/parameters/output'
+      responses:
+        '200':
+          description: A successful response
+          schema:
+            $ref: '#/definitions/SearchResults'
+parameters:
+  companyName:
+    name: name
+    description: company name
+    in: query
+    required: false
+    type: string
+  companyAddress:
+    name: address
+    description: company address (you only need to specify the city)
+    in: query
+    required: false
+    type: string
+  companyRegisterCity: 
+    name: registerCity
+    description: the city of the court where the company is registered, for example Hamburg
+    in: query
+    required: false
+    type: string
+  companyRegisterId:  
+    name: registerId
+    description: the ID of under which the company is registered, for example HRB 12345
+    in: query
+    required: false
+    type: string
+  companyId:
+    name: companyId
+    description: internal company id (do not store this id in an external database, it may change over time)
+    in: query
+    required: false
+    type: string
+  fuzzyMatch:
+    name: fuzzyMatch
+    description: true to find best match (similar name and nearby address)
+    in: query
+    required: false
+    type: boolean
+  registerKey:
+    name: registerKey
+    description: key that has been provided via the register uniqueKey field
+    in: query
+    required: false
+    type: string
+  personFirstName: 
+    name: firstName
+    description: first name(s) of a person
+    in: query
+    required: false
+    type: string
+  personLastName: 
+    name: lastName
+    description: last name of a person
+    in: query
+    required: false
+    type: string
+  personAddress:
+    name: address
+    description: person address (you only need to specify the city)
+    in: query
+    required: false
+    type: string
+  birthDate:
+    name: birthDate
+    description: birth date
+    in: query
+    required: false
+    type: string
+    format: date
+  personId:
+    name: personId
+    description: internal person id (do not store this id in an external database, it may change over time)
+    in: query
+    required: false
+    type: string
+  sources:
+    name: sources
+    description: restrict which sources are allowed for the returned publications
+    in: query
+    required: false
+    type: array
+    collectionFormat: pipes
+    items:
+      $ref: '#/definitions/PublicationSource'
+  content:
+    name: content
+    description: whether to include publication text / html (may significantly slow down response)
+    in: query
+    required: false
+    type: boolean
+  censor:
+    name: censor
+    description: should be set when presenting the content on a public website
+    in: query
+    required: false
+    type: boolean
+  offset:
+    name: offset
+    description: offset of first item to return
+    in: query
+    required: false
+    type: integer
+    format: int32
+  limit:
+    name: limit
+    description: maximum number of items to return
+    in: query
+    required: false
+    type: integer
+    format: int32
+  pos:
+    name: pos
+    type: string
+    description: if additional results shall be downloaded, set this to the value of the newPos attribute of the previous response
+    in: query
+    required: false
+  output:
+    name: output
+    type: string
+    description: response format
+    enum: ["json", "xml"]
+    default: "json"
+    in: query
+    required: false
+  history:
+    name: history
+    description: true to include historical data
+    in: query
+    required: false
+    type: boolean
+  financials:
+    name: financials
+    description: true to include financial data
+    in: query
+    required: false
+    type: boolean
+  events:
+    name: events
+    description: true to include event data
+    in: query
+    required: false
+    type: boolean
+  eventTypes:
+    name: eventTypes
+    description: restrict which event types wille be returned if events equals true
+    in: query
+    required: false
+    type: array
+    collectionFormat: pipes
+    items:
+      $ref: '#/definitions/EventType'
+  maxEvents:
+    name: maxEvents
+    description: maximum number of events to return
+    in: query
+    required: false
+    type: integer
+    format: int32
+  relations:
+    name: relations
+    description: true to include related company and person data
+    in: query
+    required: false
+    type: boolean
+  status:
+    name: status
+    description: list of valid statuses (active, terminated, liquidation)
+    required: false
+    type: string
+    in: query
+    collectionFormat: pipes
+    items:
+      enum: ["active", "liquidation", "terminated"]
+  sheets:
+    name: sheets
+    description: true to include company financial sheets (balance, earnings)
+    in: query
+    required: false
+    type: boolean
+  extras:
+    name: extras
+    description: true to include extra company data provided by 3rd parties
+    in: query
+    required: false
+    type: boolean
+definitions:
+  Company:
+    title: Company
+    description: All data for a particular company
+    type: object
+    properties:
+      id:
+        type: string
+        description: internal company id (do not store this id in an external database, it may change over time)
+      name:
+        $ref: '#/definitions/CompanyName'
+        description: name of the company
+      address:
+        $ref: '#/definitions/Address'
+        description: current address
+      register:
+        $ref: '#/definitions/Register'
+        description: register information
+      subject:
+        type: string
+        description: subject according to register filing (Unternehmensgegenstand)
+      northDataUrl:
+        type: string
+        description: North data web page for this company
+      terminated:
+        type: boolean
+        description: company has been terminated 
+      status:
+        type: string
+        enum: ["active", "liquidation", "terminated"] 
+        description: current status of the company, where liquidation is the intermediate state before the final removal from the register (=terminated)
+      history:
+        $ref: '#/definitions/CompanyHistory'
+        description: earlier names, addresses, and register entries
+      financials:
+        $ref: '#/definitions/Financials'
+        description: financial performance indicators
+      events: 
+        $ref: '#/definitions/Events'
+        description: relevant events in the history of the company
+      extras:
+        type: array
+        description: extra data provided by 3rd parties
+        items:
+          $ref: '#/definitions/Extras'
+      sheets:
+        type: array
+        description: company's financial sheets (such as balance and earnings sheets)
+        items:
+          $ref: '#/definitions/Sheet'
+      relatedCompanies:
+        $ref: '#/definitions/Relations'
+        description: related companies
+      relatedPersons:
+        $ref: '#/definitions/Relations'
+        description: related persons
+      blocked: 
+        type: boolean
+        description: company data should not be publicly on the Internet because of a request for privacy protection
+    required:
+      ["id", "name", "address"]
+  CompanyName:
+    type: object
+    properties:
+      name:
+        type: string
+        description: name of a company
+      legalForm: 
+        type: string
+        description: 'legal form (one of: A/S, AG, AG & Co. KG, AöR, Co. KG, d.o.o., e. K., e. V., eG, EWIV, gAG, GbR, gGmbH, GmbH, GmbH & Co. KG, gSE, gUG, Inh., InvAG, KG, KGaA, KGaA & Co. KG, Ltd., Ltd. & Co. KG, OHG, PartGG, plc, REITG, S.L., SCE, SCE, SCE mbH, SE, SE & Co. KG, Stiftung & Co. KG, UG, UG & Co. KG, VVaG)'
+    required:
+      ["name"]
+  Register:
+    type: object
+    description: 'register entry information (e.g., Amtsgericht Hamburg HRB 9999)'
+    properties:
+      city:
+        type: string
+        description: 'city of the register court (e.g. Hamburg)'
+      id:
+        type: string
+        description: 'ID of the register filing (e.g. HRB 9999)'
+      uniqueKey:
+        type: string
+        description: unique numerical key for repeatably unique identification of the register entry
+    required:
+      ["id"]
+  Filing:
+    type: object
+    description: Court Filing (e.g., Insolvenzgericht Charlottenburg 36w IN 3284/16)
+    properties:
+      name: 
+        type: string
+        description: complete string 
+      source:
+        $ref: '#/definitions/PublicationSource'
+      city: 
+        type: string
+        description: 'city of the register court (e.g. Charlottenburg)'
+      id:
+        type: string
+        description: 'ID of the court filing (e.g., 36w IN 3284/16)'
+    required:
+      ["id"]
+  Address:
+    type: object
+    properties:
+      street:
+        type: string
+        description: street and house number
+      postalCode:
+        type: string
+        description: postal code
+      city:
+        type: string
+        description: city
+      state:
+        type: string
+        description: state
+      country:
+        type: string
+        description: two-letter ISO country code
+      lat:
+        type: number
+        format: double
+        description: geo coordinates, latitude part
+      lng:
+        type: number
+        format: double
+        description: geo coordinates, longitude part
+      formattedValue:
+        type: string
+        description: the whole address in one human readable string
+    required:
+      ["city", "country"]
+  CompanyNameHistoryItem:
+    type: object
+    properties:
+      name:
+        $ref: '#/definitions/CompanyName'
+      date:
+        type: string
+        format: date
+        description: since when the referred company name is (known to be) in use
+    required:
+      ["name"]
+  AddressHistoryItem:
+    type: object
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      date:
+        type: string
+        format: date
+        description: since when the referred address is (known to be) in use
+    required:
+      ["address"]
+  RegisterHistoryItem:
+    type: object
+    properties:
+      register:
+        $ref: '#/definitions/Register'
+      date:
+        type: string
+        format: date
+        description: since when this registry entry is valid
+    required:
+      ["register"]
+  CompanyHistory:
+    type: object
+    properties:
+      names:
+        type: array
+        description: name history of a company
+        items:
+          $ref: '#/definitions/CompanyNameHistoryItem'
+      addresses:
+        type: array
+        description: adress history of a company
+        items:
+          $ref: '#/definitions/AddressHistoryItem'
+      registers:
+        type: array
+        description: register entry history of a company
+        items:
+          $ref: '#/definitions/RegisterHistoryItem'
+      financials:
+        type: array
+        description: historical financial data
+        items:
+          $ref: '#/definitions/Financials'
+  Events:
+    type: object
+    description: list of events
+    properties:
+      items: 
+        type: array
+        description: the list of events
+        items:
+          $ref: '#/definitions/Event'  
+    required:
+      ["items"]
+  Event:
+    type: object
+    description: event
+    properties: 
+      type: 
+        type: string
+        description: one of ...
+      date:
+        description: when it happened
+        type: string
+        format: date
+      description:
+        type: string
+        description: human-readable description of what happend
+  Financials:
+    type: object
+    description: financial data
+    properties:
+      date:
+        type: string
+        format: date
+        description: reference date
+      formattedDate:
+        type: string
+        description: date formatted as a german string 
+      consolidated:
+        type: boolean
+        description: true if the financial data refer to a consolidated balance (Konzernabschluss)
+      source:
+        $ref: '#/definitions/FinancialsSource'
+        description: source of financial data
+      items:
+        type: array
+        description: list of financial numbers (maybe empty. If empty, see note for the reason)
+        items:
+          $ref: '#/definitions/Financial'
+      note: 
+        description: explaining numbers (or their absence)
+        $ref: '#/definitions/FinancialsNote'
+    required:
+      [ "date", "formattedDate", "consolidated", "items"]
+  Financial:
+    type: object
+    description: single financial number
+    properties:
+      id:
+        type: string
+        description: type of number (for example, revenue). Please see the document Finanz-Kennzahlentabelle for a complete list
+      name:
+        type: string
+        description: name in German language (for example, Umsatz)
+      value:
+        type: number
+        format: double
+        description: actual value
+      unit:
+        type: string
+        description: unit or currency (EUR, % or empty)
+      note:
+        type: string
+        description: optional note or comment with respect to the calculation of the financial
+      formattedValue:
+        type: string
+        description: value formatted as a string (German number formatting conventions)
+    required: ["id", "name", "value", "formattedValue"]
+  FinancialsSource:
+    type: object
+    description: source of financial data
+    properties:
+      publicationId:
+        type: string
+        description: internal publication ID
+      publicationTitle:
+        type: string
+        description: publication title such as "Jahresabschluss 2015"
+      publicationDate:
+        type: string
+        format: date
+        description: date the publication was published
+      auditorName:
+        type: string
+        description: name of auditing company
+      snippets:
+        type: array
+        description: excerpts from the original publication containing the financial data
+        items:
+          $ref: '#/definitions/SourceSnippet'
+    required: ["publicationDate", "publicationTitle"]
+  FinancialsNote:
+    type: object
+    description: additional explanation of financials (or of their absence)
+    properties:
+      text:
+        type: string
+        description: explanation as plain text
+      html:
+        type: string
+        description: explanation as html
+    required: ["text", "html"]    
+  SourceSnippet:
+    type: object
+    description: excerpts from an original publication
+    properties:
+      title:
+        type: string
+        description: title
+      content:
+        type: string
+        description: text
+      contentType:
+        type: string
+        description: content format, usually "text/html"
+    required: ["title", "content"]
+  Extras:
+    type: object
+    description: set of additional data, typically provided by 3rd parties.
+    properties:
+      sourceName:
+        type: string
+        description: name of the source
+      sourceUrl:
+        type: string
+        description: url of the source
+      items:
+        type: array
+        description: extra data items in this set
+        items:
+          $ref: '#/definitions/Extra'
+    required: ["extras"]
+  Extra:
+    type: object
+    description: extra data item, typically provided by a 3rd party.
+    properties:
+      id:
+        type: string
+        description: "common ids are: email, url, phone, fax, vatId, wz"
+      name:
+        type: string
+        description: describing name in German language (for example, "E-Mail")
+      value:
+        type: string
+        description: actual value
+      formattedHtmlValue:
+        type: string
+        description: value formatted as an HTML string 
+    required: ["id", "name", "value", "formattedHtmlValue"]
+  Publication:
+    type: object
+    properties:
+      id:
+        type: string
+        description: interne ID
+      date:
+        type: string
+        format: date
+        description: publishing date
+      source:
+        $ref: '#/definitions/PublicationSource'
+      sourceName:
+        type: string
+        description: full name of source
+      category:
+        type: string
+        description: category under which publication was filed in the original source
+      originalLanguage:
+        type: string
+        description: ISO language code
+      language:
+        type: string
+        description: ISO language code. This is different from the original language, for translations only. 
+      title:
+        type: string
+        description: title of publication
+      northDataUrl:
+        type: string
+        description: North data web page for this publication
+      text:
+        type: string
+        description: raw text of the publication
+      html:
+        type: string
+        description: text of publication in HTML format
+      publisher:
+        $ref: '#/definitions/Company'
+        description: company that published this publication
+      structure:
+        $ref: '#/definitions/PublicationStructure'
+        description: result of structural analysis
+      mentionedCompanies:
+        $ref: '#/definitions/Relations'
+        description: list of companies mentioned in this publication
+      mentionedPersons:
+        $ref: '#/definitions/Relations'
+        description: list of persons mentioned in this publication
+      filings:
+        type: array
+        description: 'court filings (currently only: insolvency filings)'
+        items:
+          $ref: '#/definitions/Filing'
+      blocked: 
+        type: boolean
+        description: publication data should not be publicly on the Internet because of a request for privacy protection
+      internal:
+        type: object
+        description: additional data used for internal purposes
+    required: ["id", "date", "source", "title"]
+  Topic:
+    description: topic of a publication
+    type: object
+    properties:
+      name:
+        type: string
+        description: German description (e.g., "Stammkapital")
+      value:
+        type: string
+        description: accompanying value (e.g., €100.000,-)
+      type:
+        type: string
+        enum: ["Entry", "Continuation", "Name", "Headquarters", "Address", "Capital", "Subject", "Contract", "Statute", "LegalForm", "Proxy", "ListOfBoardMembers", "ConvertibleBonds", "Liquidation", "Exit", "Aufhebung", "Verguetung", "AnkuendigungRestschuldbefreiung", "Restschuldbefreiung", "EinstellungMangelsMasse", "Eroeffnung", "Masseunzulänglichkeit", "Pruefungstermin", "Schlusstermin", "VerteilungsVerzeichnis", "AbweisungMangelsMasse", "TreuhaenderBestimmung", "Insolvenzverwalter", "VorlaufigerInsolvenzverwalter", "Sicherungsmassnahme", "InsolvenzSonstiges"]
+        description: internal identificator for the topic
+    required: ["type", "name"]
+  PublicationStructure:
+    type: object
+    description: result of the structural analysis of a publication
+    properties:
+      topics:
+        type: array
+        description: topics of the publication
+        items:
+          $ref: '#/definitions/Topic'
+  PublicationSource:
+    type: string
+    enum:
+      - Hrb
+      - Eb
+      - Ins
+      - Ut
+      - Nd
+      - Fk
+    description: >
+      Source identifier:
+        * Hrb - Handelsregisterbekanntmachungen
+        * Eb - Elektronischer Bundesanzeiger
+        * Ins - Insolvenzbekanntmachungen
+        * Ut - Unternehmensträger (Handelsregister)
+        * Fk - Förderkatalog
+        * Nd - North Data (manual corrections and bug fixes)
+  EventType:
+    type: string
+    description: event type
+  Relation:
+    type: object
+    description: relation of a company or person to another company or person
+    properties:
+      company:
+        description: Related company (only base data - id, name, address, register)
+        $ref: '#/definitions/Company'
+      person:
+        $ref: '#/definitions/Person'
+        description: Related person (only base data - id, first and last name, adress, birth date)
+      roles:
+        type: array
+        description: description of the type of the relation 
+        items:
+          $ref: '#/definitions/Role'
+    required:
+      ["roles"]
+  Relations:
+    type: object
+    description: list of related companies / persons
+    properties:
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/Relation'
+    required:
+      ["items"]
+  Role:
+    type: object
+    description: description of the type of a relation
+    required: ["type", "name", "group"]
+    properties:
+      date:
+        type: string
+        format: date
+        description: date
+      name:
+        type: string
+        description: German description
+      demotion:
+        type: boolean
+        description: true if the relation ends at the given date (e.g., "Aussscheiden eines Geschäftsführers")
+      announce:
+        type: boolean
+        description: true if the relation might be preliminary ("Ankündigung")
+      type:
+        type: string
+        enum: ["Publisher", "Umwandlung", "Sitzverlegung", "Hgb264", "Komplementaer", "Beherrschung", "Gewinnnabfuehrung", "Teilgewinnnabfuehrung", "Gewinngemeinschaft", "Betriebspacht", "Betriebsueberlassung", "Uebernahme", "Verschmolzen", "Ausgliederung", "Abspaltung", "Inhaber", "Paechter", "PersoenlichHaftenderGesellschafter", "Vorstandsvorsitzender", "Vorstand", "Geschaeftsfuehrer", "StellvertretenderGeschaeftsfuehrer", "GeschaeftsfuehrenderDirektor", "Notgeschaeftsfuehrer", "StaendigerVertreter", "Partner", "Director", "Liquidator", "Aufsichtsrat", "Prokura", "Handelnd", "Unknown"]
+        description: internal identifier
+      group:
+        type: string
+        enum: ["Succession", "Control", "Merger", "Personal", "Other"]
+        description: internal group identifier
+      dir:
+        type: string
+        enum: ["None", "Source", "Target", "Bi"]
+        description: Direction. The exact interpretation depends of the value of the field "group". Case "succession" - older company is "Source". Case "merger" - Sold company is "Source", Buyer is target "Target". Case "control" - controlling company is "Source".
+  PersonName:
+    type: object
+    properties:
+      firstName:
+        type: string
+        description: first name(s)
+      lastName:
+        type: string
+        description: last name
+      title:
+        type: string
+        description: title
+    required: [lastName]
+  Person:
+    type: object
+    properties:
+      id:
+        type: string
+        description: internal person id (do not store this id in an external database, it may change over time)
+      name:
+        $ref: '#/definitions/PersonName'
+      address:
+        $ref: '#/definitions/Address'
+      birthDate:
+        description: Birth date
+        type: string
+        format: date
+      birthYear:
+        description: Sometimes only the birth years is known, but not the exact date
+        type: integer
+        format: int32
+      deceased:
+        description: person is known to be dead
+        type: boolean
+      northDataUrl:
+        type: string
+        description: North data web page for this person
+      relatedCompanies:
+        $ref: '#/definitions/Relations'
+        description: Related companies
+      blocked: 
+        type: boolean
+        description: person data should not be publicly on the Internet because of a request for privacy protection
+    required: ["id", "name"]
+  GenericResponse:
+    type: object
+    properties:
+      newPos:
+        type: string
+      publications:
+        type: array
+        items:
+          $ref: '#/definitions/Publication'
+  SearchResults:
+    type: object
+    description: search results
+    properties:
+      results:
+        type: array
+        description: list of results
+        items:
+          $ref: '#/definitions/SearchResult'
+      censored:
+        type: boolean
+        description: true if results have been omitted because of censoring
+      offset:
+        type: integer
+        format: int32
+        description: offset of result array in all results
+      nextOffset: 
+        type: integer
+        format: int32
+        description: offset to retrieve next batch of results
+      nextPos: 
+        type: string
+        description: position to retrieve next batch of results
+      total: 
+        type: integer
+        format: int32
+        description: total number of results (usually, this number is not available, unfortunately)
+  SearchResult:
+    type: object
+    description: company, person or publication that is result of a search
+    properties:
+      company:
+        description: company found
+        $ref: '#/definitions/Company'
+      person:
+        description: person found
+        $ref: '#/definitions/Person'
+      publication:
+        description: publication found
+        $ref: '#/definitions/Publication'
+      matchedName:
+        type: string
+        description: the matched name (useful if a company has been renamed)        
+  Money:
+    type: object
+    description: amount and currency
+    properties:
+      currency:
+        description: currency (three-letter code)
+        type: string
+      amount: 
+        description: amount as a number
+        type: number
+        format: double
+      formattedValue:
+        description: amount and currency formatted as a human-readable string
+        type: string
+    required: ["currency", "amount", "formattedValue"]
+  Product:
+    type: object
+    description: a publication that can be bought and downloaded
+    properties:
+      id:
+        type: string
+        description: string to identify a product when ordering for download
+      name: 
+        type: string
+        description: name of the product
+      date:
+        type: string
+        format: date
+        description: publishing date
+      price:
+        $ref: '#/definitions/Money'
+        description: cost of the product
+    required: ["id", "name", "price"]
+  Order: 
+    type: object
+    description: result of an order
+    properties: 
+      id: 
+        type: string
+        description: string to identify the order
+      items:
+        type: array
+        items:
+          $ref: '#/definitions/OrderItem'    
+  OrderItem:
+    type: object
+    description: information whether and where a product maybe downloaded
+    properties:
+      product:
+        $ref: '#/definitions/Product'
+        description: product bought
+      status:
+        type: string
+        enum: ["waiting", "ready", "unavailable"] 
+        description: whether the publication is ready for download
+      url:
+        type: string
+        description: url to download from (when the status is 'ready')
+      contentType:
+        type: string
+        description: mime type
+    required: ["productId", "status"]
+  Sheet:
+    type: object
+    description: represents balance sheets, profit and loss statements, and similar structures
+    properties:
+      columnHeaders:
+        type: array
+        description: list of column headers
+        items:
+          $ref: '#/definitions/SheetColumnHeader'
+      rows:
+        type: array
+        description: list of rows
+        items:
+          $ref: '#/definitions/SheetRow'
+      type:
+        type: string
+        enum: ["balance", "earnings", "cashflow"] 
+        description: the kind of financial data reported in this sheet
+      consolidated:
+        type: boolean
+        description: true if the financial is consolidated (including dependent companies) or not (excluding)
+      reporting:
+        type: string
+        enum: ["HGB", "IFRS", "GAAP"] 
+        description: the reporting standard used
+      unit:
+        type: string
+        description: unit or currency (EUR, % or empty)
+    required:
+      ["columnHeaders", "rows", "type", "consolidated"]
+  SheetColumnHeader:
+    type: object
+    description: column header of a sheet 
+    properties:
+      date:
+        type: string
+        format: date
+        description: the date of entries in this column
+      source:
+        $ref: '#/definitions/FinancialsSource'
+        description: source of entries in this column
+    required:
+      ["date"]
+  SheetRow:
+    type: object
+    description: row of a sheet
+    properties:
+      name:
+        type: string
+        description: 
+      level:
+        description: if the sheet is structured as a tree, indicates the depth of the nesting of this row. 
+        type: integer
+        format: int32
+      cells:
+        type: array
+        description: list of cells
+        items:
+          $ref: '#/definitions/SheetCell'
+    required:
+      ["name", "cells"]
+  SheetCell:
+    type: object
+    description: cell of a sheet
+    properties:
+      value:
+        description: numeric value 
+        type: number
+        format: double 
+
+
+
+      
+
+
