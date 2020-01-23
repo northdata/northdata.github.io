@@ -1284,14 +1284,13 @@ components:
       description: result of the structural analysis of a publication
     PublicationSource:
       type: string
-      description: |
-        Source identifier:
-          * Hrb - Handelsregisterbekanntmachungen
-          * Eb - Elektronischer Bundesanzeiger
-          * Ins - Insolvenzbekanntmachungen
-          * Ut - Unternehmensträger (Handelsregister)
-          * Fk - Förderkatalog
-          * Nd - North Data (manual corrections and bug fixes)
+      description: "Source identifier:\n  * Hrb - Handelsregisterbekanntmachungen\n\
+        \  * Eb - Elektronischer Bundesanzeiger\n  * Ins - Insolvenzbekanntmachungen\n\
+        \  * Ut - Unternehmensträger (Handelsregister)\n  * Fk - Förderkatalog\n \
+        \ * Lei - Legal Entity Identifier \n  * Ler - Legal Entity Relationship\n\
+        \  * Bse - BaFin Besondere Stimmrechte, Emittent\n  * Bsg - BaFin Besondere\
+        \ Stimmrechte, Geschäft\n  * Fk - Förderkatalog\n  * Nd - North Data (manual\
+        \ corrections and bug fixes)\n"
       enum:
       - Hrb
       - Eb
