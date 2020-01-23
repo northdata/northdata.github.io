@@ -1298,6 +1298,10 @@ components:
       - Ut
       - Nd
       - Fk
+      - Lei
+      - Ler
+      - Bse
+      - Bsg
     EventType:
       type: string
       description: event type
