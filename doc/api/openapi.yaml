@@ -1240,38 +1240,6 @@ components:
         type:
           type: string
           description: internal identificator for the topic
-          enum:
-          - Entry
-          - Continuation
-          - Name
-          - Headquarters
-          - Address
-          - Capital
-          - Subject
-          - Contract
-          - Statute
-          - LegalForm
-          - Proxy
-          - ListOfBoardMembers
-          - ConvertibleBonds
-          - Liquidation
-          - Exit
-          - Aufhebung
-          - Verguetung
-          - AnkuendigungRestschuldbefreiung
-          - Restschuldbefreiung
-          - EinstellungMangelsMasse
-          - Eroeffnung
-          - Masseunzulänglichkeit
-          - Pruefungstermin
-          - Schlusstermin
-          - VerteilungsVerzeichnis
-          - AbweisungMangelsMasse
-          - TreuhaenderBestimmung
-          - Insolvenzverwalter
-          - VorlaufigerInsolvenzverwalter
-          - Sicherungsmassnahme
-          - InsolvenzSonstiges
       description: topic of a publication
     PublicationStructure:
       type: object
@@ -1289,19 +1257,10 @@ components:
         \  * Ut - Unternehmensträger (Handelsregister)\n  * Fk - Förderkatalog\n \
         \ * Lei - Legal Entity Identifier \n  * Ler - Legal Entity Relationship\n\
         \  * Bse - BaFin Besondere Stimmrechte, Emittent\n  * Bsg - BaFin Besondere\
-        \ Stimmrechte, Geschäft\n  * Fk - Förderkatalog\n  * Nd - North Data (manual\
+        \ Stimmrechte, Geschäft\n  * Fk - Förderkatalog\n  * Hsk - Hochschulkompass\n\
+        \  * Dp - DPMA German Patent and Trademark Office, Patents\n  * Dp - DPMA\
+        \ German Patent and Trademark Office, Trademarks\n  * Nd - North Data (manual\
         \ corrections and bug fixes)\n"
-      enum:
-      - Hrb
-      - Eb
-      - Ins
-      - Ut
-      - Nd
-      - Fk
-      - Lei
-      - Ler
-      - Bse
-      - Bsg
     EventType:
       type: string
       description: event type
@@ -1354,39 +1313,6 @@ components:
         type:
           type: string
           description: internal identifier
-          enum:
-          - Publisher
-          - Umwandlung
-          - Sitzverlegung
-          - Hgb264
-          - Komplementaer
-          - Beherrschung
-          - Gewinnnabfuehrung
-          - Teilgewinnnabfuehrung
-          - Gewinngemeinschaft
-          - Betriebspacht
-          - Betriebsueberlassung
-          - Uebernahme
-          - Verschmolzen
-          - Ausgliederung
-          - Abspaltung
-          - Inhaber
-          - Paechter
-          - PersoenlichHaftenderGesellschafter
-          - Vorstandsvorsitzender
-          - Vorstand
-          - Geschaeftsfuehrer
-          - StellvertretenderGeschaeftsfuehrer
-          - GeschaeftsfuehrenderDirektor
-          - Notgeschaeftsfuehrer
-          - StaendigerVertreter
-          - Partner
-          - Director
-          - Liquidator
-          - Aufsichtsrat
-          - Prokura
-          - Handelnd
-          - Unknown
         group:
           type: string
           description: internal group identifier
