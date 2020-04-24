@@ -828,6 +828,8 @@ components:
           $ref: '#/components/schemas/CompanyHistory'
         financials:
           $ref: '#/components/schemas/Financials'
+        mktgTechIndicators:
+          $ref: '#/components/schemas/Financials'
         events:
           $ref: '#/components/schemas/Events'
         extras:
@@ -981,6 +983,11 @@ components:
           items:
             $ref: '#/components/schemas/RegisterHistoryItem'
         financials:
+          type: array
+          description: historical financial data
+          items:
+            $ref: '#/components/schemas/Financials'
+        mktgTechIndicators:
           type: array
           description: historical financial data
           items:
@@ -1724,6 +1731,12 @@ components:
       name: financials
       in: query
       description: true to include financial data
+      schema:
+        type: boolean
+    mktgtech:
+      name: mktgtech
+      in: query
+      description: true to include marketing & technology indicators
       schema:
         type: boolean
     events:
