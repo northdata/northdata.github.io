@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.145.1
+  version: 1.146.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -1069,6 +1069,10 @@ components:
         unit:
           type: string
           description: unit or currency (EUR, % or empty)
+        estimate:
+          type: boolean
+          description: true if the value is not exact (because it relies on an estimate
+            or an unsafe determination method)
         note:
           type: string
           description: optional note or comment with respect to the calculation of
