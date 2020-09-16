@@ -1,6 +1,6 @@
 swagger: '2.0'
 info:
-  version: 1.146.0
+  version: 1.153.0
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -55,6 +55,7 @@ paths:
         - $ref: '#/parameters/fuzzyMatch'
         - $ref: '#/parameters/registerKey'
         - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
         - $ref: '#/parameters/censor'
         - $ref: '#/parameters/offset'
@@ -100,6 +101,7 @@ paths:
         - $ref: '#/parameters/birthDate'
         - $ref: '#/parameters/personId'
         - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
         - $ref: '#/parameters/censor'
         - $ref: '#/parameters/offset'
@@ -139,6 +141,7 @@ paths:
           type: string
           format: date
         - $ref: '#/parameters/sources'
+        - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
         - name: publisherHistory
           description: true to include historical data for the publisher
@@ -192,12 +195,13 @@ paths:
           in: query
           required: false
           type: string
-        - $ref: '#/parameters/status'
         - $ref: '#/parameters/pos'
         - $ref: '#/parameters/censor'
         - $ref: '#/parameters/offset'
         - $ref: '#/parameters/limit'
         - $ref: '#/parameters/output'
+        - $ref: '#/parameters/countries'
+        - $ref: '#/parameters/status'
         - $ref: '#/parameters/history'
         - $ref: '#/parameters/financials'
         - $ref: '#/parameters/events'
@@ -230,10 +234,11 @@ paths:
           required: false
           type: boolean
           description: true to include former company names
-        - $ref: '#/parameters/status'
         - $ref: '#/parameters/censor'
         - $ref: '#/parameters/limit'
         - $ref: '#/parameters/output'
+        - $ref: '#/parameters/countries'
+        - $ref: '#/parameters/status'
       responses:
         '200':
           description: A successful response
@@ -324,6 +329,7 @@ paths:
           items:
             type: string
             format: date
+        - $ref: '#/parameters/countries'
         - $ref: '#/parameters/status'
         - $ref: '#/parameters/history'
         - $ref: '#/parameters/financials'
@@ -418,13 +424,17 @@ parameters:
     type: string
   sources:
     name: sources
-    description: restrict which sources are allowed for the returned publications
+    description: DEPRECATED (will be removed at some point of time)
     in: query
     required: false
     type: array
     collectionFormat: pipes
-    items:
-      $ref: '#/definitions/PublicationSource'
+  source:
+    name: source
+    description: only publications with this source will be returned
+    in: query
+    required: true
+    type: string
   content:
     name: content
     description: whether to include publication text / html (may significantly slow down response)
@@ -496,8 +506,6 @@ parameters:
     required: false
     type: array
     collectionFormat: pipes
-    items:
-      $ref: '#/definitions/EventType'
   maxEvents:
     name: maxEvents
     description: maximum number of events to return
@@ -511,6 +519,13 @@ parameters:
     in: query
     required: false
     type: boolean
+  countries:
+    name: countries
+    description: list of country ISO codes to restrict result set (empty to retrieve all countries)
+    required: false
+    type: string
+    in: query
+    collectionFormat: pipes
   status:
     name: status
     description: list of valid statuses (active, terminated, liquidation)
@@ -591,6 +606,9 @@ definitions:
       relatedPersons:
         $ref: '#/definitions/Relations'
         description: related persons
+      segmentCodes:
+        type: object
+        description: 'each property (naics, isic, nace, wz, uksic) contains a list of segment codes in respective standard classification'
       blocked: 
         type: boolean
         description: company data should not be publicly on the Internet because of a request for privacy protection
@@ -901,6 +919,14 @@ definitions:
         type: string
         format: date
         description: publishing date
+      effectiveDate:
+        type: string
+        format: date
+        description: date when published changes became effective (e.g., appointment of new director)
+      creationTime:
+        type: string
+        format: date-time
+        description: database creation time (which is right after the initial publication download)
       source:
         $ref: '#/definitions/PublicationSource'
       sourceName:

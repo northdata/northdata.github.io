@@ -183,7 +183,7 @@ font-style: italic;
     <div class="app-desc">Programmatic access to the North Data DB.</div>
     <div class="app-desc">More information: <a href="https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md">https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md</a></div>
     <div class="app-desc">Contact Info: <a href="support@northdata.de">support@northdata.de</a></div>
-    <div class="app-desc">Version: 1.146.0</div>
+    <div class="app-desc">Version: 1.153.0</div>
     <div class="app-desc">BasePath:/_api</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -434,6 +434,7 @@ font-style: italic;
       "value" : 1.4658129805029452
     } ]
   },
+  "segmentCodes" : "{}",
   "address" : {
     "country" : "country",
     "lng" : 6.027456183070403,
@@ -961,7 +962,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; key that has been provided via the register uniqueKey field </div><div class="param">sources (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which sources are allowed for the returned publications </div><div class="param">content (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; DEPRECATED (will be removed at some point of time) </div><div class="param">source (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; only publications with this source will be returned </div><div class="param">content (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; whether to include publication text / html (may significantly slow down response) </div><div class="param">censor (optional)</div>
 
@@ -990,6 +993,7 @@ font-style: italic;
   "publications" : [ {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -1269,6 +1273,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -1757,6 +1762,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -1845,6 +1851,7 @@ font-style: italic;
   }, {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -2124,6 +2131,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -2612,6 +2620,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -2820,7 +2829,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; internal person id (do not store this id in an external database, it may change over time) </div><div class="param">sources (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which sources are allowed for the returned publications </div><div class="param">content (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; DEPRECATED (will be removed at some point of time) </div><div class="param">source (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; only publications with this source will be returned </div><div class="param">content (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; whether to include publication text / html (may significantly slow down response) </div><div class="param">censor (optional)</div>
 
@@ -2849,6 +2860,7 @@ font-style: italic;
   "publications" : [ {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -3128,6 +3140,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -3616,6 +3629,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -3704,6 +3718,7 @@ font-style: italic;
   }, {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -3983,6 +3998,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -4471,6 +4487,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -4596,7 +4613,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; DEPRECATED - please use maxTimestamp instead format: date</div><div class="param">sources (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which sources are allowed for the returned publications </div><div class="param">content (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; DEPRECATED (will be removed at some point of time) </div><div class="param">source (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; only publications with this source will be returned </div><div class="param">content (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; whether to include publication text / html (may significantly slow down response) </div><div class="param">publisherHistory (optional)</div>
 
@@ -4635,6 +4654,7 @@ font-style: italic;
   "publications" : [ {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -4914,6 +4934,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -5402,6 +5423,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -5490,6 +5512,7 @@ font-style: italic;
   }, {
     "date" : "2000-01-23",
     "internal" : "{}",
+    "creationTime" : "2000-01-23T04:56:07.000+00:00",
     "language" : "language",
     "source" : { },
     "originalLanguage" : "originalLanguage",
@@ -5769,6 +5792,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -6257,6 +6281,7 @@ font-style: italic;
     "sourceName" : "sourceName",
     "text" : "text",
     "category" : "category",
+    "effectiveDate" : "2000-01-23",
     "mentionedPersons" : {
       "items" : [ {
         "person" : {
@@ -6394,7 +6419,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of minimum dates for event filterings  (see user guide) format: date</div><div class="param">maxDate (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of maximum dates for event filterings  (see user guide) format: date</div><div class="param">status (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of maximum dates for event filterings  (see user guide) format: date</div><div class="param">countries (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">history (optional)</div>
 
@@ -6466,6 +6493,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -6745,6 +6773,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -7233,6 +7262,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -7487,6 +7517,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -7998,6 +8029,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -8277,6 +8309,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -8765,6 +8798,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -9019,6 +9053,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -9540,15 +9575,17 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; &quot;company&quot; to match companies only, &quot;person&quot; to match persons only, empty to match all </div><div class="param">history (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include former company names </div><div class="param">status (optional)</div>
-
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">censor (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include former company names </div><div class="param">censor (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; should be set when presenting the content on a public website </div><div class="param">limit (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum number of items to return format: int32</div><div class="param">output (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div><div class="param">countries (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div>
     </div>  <!-- field-items -->
 
 
@@ -9594,6 +9631,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -9873,6 +9911,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -10361,6 +10400,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -10615,6 +10655,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -11126,6 +11167,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -11405,6 +11447,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -11893,6 +11936,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -12147,6 +12191,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -12666,9 +12711,7 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; the query string </div><div class="param">domain (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; set to &quot;company&quot; for companies only, &quot;person&quot; for persons only, otherwise leave empty </div><div class="param">status (optional)</div>
-
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">pos (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; set to &quot;company&quot; for companies only, &quot;person&quot; for persons only, otherwise leave empty </div><div class="param">pos (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; if additional results shall be downloaded, set this to the value of the newPos attribute of the previous response </div><div class="param">censor (optional)</div>
 
@@ -12678,7 +12721,11 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum number of items to return format: int32</div><div class="param">output (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div><div class="param">history (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div><div class="param">countries (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">history (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include historical data </div><div class="param">financials (optional)</div>
 
@@ -12740,6 +12787,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -13019,6 +13067,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -13507,6 +13556,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -13761,6 +13811,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -14272,6 +14323,7 @@ font-style: italic;
     "publication" : {
       "date" : "2000-01-23",
       "internal" : "{}",
+      "creationTime" : "2000-01-23T04:56:07.000+00:00",
       "language" : "language",
       "source" : { },
       "originalLanguage" : "originalLanguage",
@@ -14551,6 +14603,7 @@ font-style: italic;
             "value" : 1.4658129805029452
           } ]
         },
+        "segmentCodes" : "{}",
         "address" : {
           "country" : "country",
           "lng" : 6.027456183070403,
@@ -15039,6 +15092,7 @@ font-style: italic;
       "sourceName" : "sourceName",
       "text" : "text",
       "category" : "category",
+      "effectiveDate" : "2000-01-23",
       "mentionedPersons" : {
         "items" : [ {
           "person" : {
@@ -15293,6 +15347,7 @@ font-style: italic;
           "value" : 1.4658129805029452
         } ]
       },
+      "segmentCodes" : "{}",
       "address" : {
         "country" : "country",
         "lng" : 6.027456183070403,
@@ -15886,6 +15941,7 @@ font-style: italic;
 <div class="param">sheets (optional)</div><div class="param-desc"><span class="param-type"><a href="#Sheet">array[Sheet]</a></span> company's financial sheets (such as balance and earnings sheets) </div>
 <div class="param">relatedCompanies (optional)</div><div class="param-desc"><span class="param-type"><a href="#Relations">Relations</a></span> related companies </div>
 <div class="param">relatedPersons (optional)</div><div class="param-desc"><span class="param-type"><a href="#Relations">Relations</a></span> related persons </div>
+<div class="param">segmentCodes (optional)</div><div class="param-desc"><span class="param-type"><a href="#object">Object</a></span> each property (naics, isic, nace, wz, uksic) contains a list of segment codes in respective standard classification </div>
 <div class="param">blocked (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> company data should not be publicly on the Internet because of a request for privacy protection </div>
     </div>  <!-- field-items -->
   </div>
@@ -16088,6 +16144,8 @@ font-style: italic;
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> interne ID </div>
 <div class="param">date </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> publishing date format: date</div>
+<div class="param">effectiveDate (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> date when published changes became effective (e.g., appointment of new director) format: date</div>
+<div class="param">creationTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span> database creation time (which is right after the initial publication download) format: date-time</div>
 <div class="param">source </div><div class="param-desc"><span class="param-type"><a href="#PublicationSource">PublicationSource</a></span>  </div>
 <div class="param">sourceName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> full name of source </div>
 <div class="param">category (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> category under which publication was filed in the original source </div>

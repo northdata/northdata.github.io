@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.146.0
+  version: 1.153.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -74,8 +74,6 @@ paths:
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/EventType'
       - name: maxEvents
         in: query
         description: maximum number of events to return
@@ -160,12 +158,16 @@ paths:
           type: string
       - name: sources
         in: query
-        description: restrict which sources are allowed for the returned publications
+        description: DEPRECATED (will be removed at some point of time)
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/PublicationSource'
+      - name: source
+        in: query
+        description: only publications with this source will be returned
+        required: true
+        schema:
+          type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
@@ -301,12 +303,16 @@ paths:
           type: string
       - name: sources
         in: query
-        description: restrict which sources are allowed for the returned publications
+        description: DEPRECATED (will be removed at some point of time)
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/PublicationSource'
+      - name: source
+        in: query
+        description: only publications with this source will be returned
+        required: true
+        schema:
+          type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
@@ -381,12 +387,16 @@ paths:
           format: date
       - name: sources
         in: query
-        description: restrict which sources are allowed for the returned publications
+        description: DEPRECATED (will be removed at some point of time)
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/PublicationSource'
+      - name: source
+        in: query
+        description: only publications with this source will be returned
+        required: true
+        schema:
+          type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
@@ -470,11 +480,6 @@ paths:
           otherwise leave empty
         schema:
           type: string
-      - name: status
-        in: query
-        description: list of valid statuses (active, terminated, liquidation)
-        schema:
-          type: string
       - name: pos
         in: query
         description: if additional results shall be downloaded, set this to the value
@@ -507,6 +512,17 @@ paths:
           - json
           - xml
           default: json
+      - name: countries
+        in: query
+        description: list of country ISO codes to restrict result set (empty to retrieve
+          all countries)
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: list of valid statuses (active, terminated, liquidation)
+        schema:
+          type: string
       - name: history
         in: query
         description: true to include historical data
@@ -529,8 +545,6 @@ paths:
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/EventType'
       - name: maxEvents
         in: query
         description: maximum number of events to return
@@ -584,11 +598,6 @@ paths:
         description: true to include former company names
         schema:
           type: boolean
-      - name: status
-        in: query
-        description: list of valid statuses (active, terminated, liquidation)
-        schema:
-          type: string
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
@@ -609,6 +618,17 @@ paths:
           - json
           - xml
           default: json
+      - name: countries
+        in: query
+        description: list of country ISO codes to restrict result set (empty to retrieve
+          all countries)
+        schema:
+          type: string
+      - name: status
+        in: query
+        description: list of valid statuses (active, terminated, liquidation)
+        schema:
+          type: string
       responses:
         "200":
           description: A successful response
@@ -701,6 +721,12 @@ paths:
           items:
             type: string
             format: date
+      - name: countries
+        in: query
+        description: list of country ISO codes to restrict result set (empty to retrieve
+          all countries)
+        schema:
+          type: string
       - name: status
         in: query
         description: list of valid statuses (active, terminated, liquidation)
@@ -728,8 +754,6 @@ paths:
         style: pipeDelimited
         schema:
           type: array
-          items:
-            $ref: '#/components/schemas/EventType'
       - name: maxEvents
         in: query
         description: maximum number of events to return
@@ -846,6 +870,11 @@ components:
           $ref: '#/components/schemas/Relations'
         relatedPersons:
           $ref: '#/components/schemas/Relations'
+        segmentCodes:
+          type: object
+          properties: {}
+          description: each property (naics, isic, nace, wz, uksic) contains a list
+            of segment codes in respective standard classification
         blocked:
           type: boolean
           description: company data should not be publicly on the Internet because
@@ -1187,6 +1216,16 @@ components:
           type: string
           description: publishing date
           format: date
+        effectiveDate:
+          type: string
+          description: date when published changes became effective (e.g., appointment
+            of new director)
+          format: date
+        creationTime:
+          type: string
+          description: database creation time (which is right after the initial publication
+            download)
+          format: date-time
         source:
           $ref: '#/components/schemas/PublicationSource'
         sourceName:
@@ -1675,12 +1714,17 @@ components:
     sources:
       name: sources
       in: query
-      description: restrict which sources are allowed for the returned publications
+      description: DEPRECATED (will be removed at some point of time)
       style: pipeDelimited
       schema:
         type: array
-        items:
-          $ref: '#/components/schemas/PublicationSource'
+    source:
+      name: source
+      in: query
+      description: only publications with this source will be returned
+      required: true
+      schema:
+        type: string
     content:
       name: content
       in: query
@@ -1756,8 +1800,6 @@ components:
       style: pipeDelimited
       schema:
         type: array
-        items:
-          $ref: '#/components/schemas/EventType'
     maxEvents:
       name: maxEvents
       in: query
@@ -1771,6 +1813,13 @@ components:
       description: true to include related company and person data
       schema:
         type: boolean
+    countries:
+      name: countries
+      in: query
+      description: list of country ISO codes to restrict result set (empty to retrieve
+        all countries)
+      schema:
+        type: string
     status:
       name: status
       in: query
