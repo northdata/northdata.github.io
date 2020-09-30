@@ -831,9 +831,17 @@ components:
           $ref: '#/components/schemas/Address'
         register:
           $ref: '#/components/schemas/Register'
+        lei:
+          type: string
+          description: International Legal Entity Identifier (LEI)
         subject:
           type: string
           description: subject according to register filing (Unternehmensgegenstand)
+        segmentCodes:
+          type: object
+          properties: {}
+          description: each property (naics, isic, nace, wz, uksic) contains a list
+            of segment codes in respective standard classification
         northDataUrl:
           type: string
           description: North data web page for this company
@@ -870,11 +878,6 @@ components:
           $ref: '#/components/schemas/Relations'
         relatedPersons:
           $ref: '#/components/schemas/Relations'
-        segmentCodes:
-          type: object
-          properties: {}
-          description: each property (naics, isic, nace, wz, uksic) contains a list
-            of segment codes in respective standard classification
         blocked:
           type: boolean
           description: company data should not be publicly on the Internet because
@@ -900,6 +903,9 @@ components:
       - id
       type: object
       properties:
+        country:
+          type: string
+          description: register country (two-letter ISO code)
         city:
           type: string
           description: city of the register court (e.g. Hamburg)
