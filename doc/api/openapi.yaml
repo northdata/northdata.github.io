@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.155.0
+  version: 1.156.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -643,14 +643,9 @@ paths:
     get:
       description: 'power search: supports geo and financial criteria'
       parameters:
-      - name: name
+      - name: keywords
         in: query
-        description: company name or empty
-        schema:
-          type: string
-      - name: description
-        in: query
-        description: wz code or keywords to match in the company's subject
+        description: keywords to match in the company's subject
         schema:
           type: string
       - name: address
@@ -669,9 +664,19 @@ paths:
         description: list of legal forms
         schema:
           type: string
-      - name: financialId
+      - name: segmentCodeStandard
         in: query
-        description: list of financial ids for financial filtering (see user guide)
+        description: name of the segment code standard to use
+        schema:
+          type: string
+      - name: segmentCodes
+        in: query
+        description: list of segment codes
+        schema:
+          type: string
+      - name: indicatorId
+        in: query
+        description: list of indicator ids for performance filtering (see user guide)
         style: pipeDelimited
         schema:
           type: array
@@ -679,7 +684,7 @@ paths:
             type: string
       - name: lowerBound
         in: query
-        description: list of lower bounds for financial filterings  (see user guide)
+        description: list of lower bounds for performance filterings  (see user guide)
         style: pipeDelimited
         schema:
           type: array
@@ -688,13 +693,31 @@ paths:
             format: double
       - name: upperBound
         in: query
-        description: list of upper bounds for financial filterings  (see user guide)
+        description: list of upper bounds for performance filterings  (see user guide)
         style: pipeDelimited
         schema:
           type: array
           items:
             type: number
             format: double
+      - name: lowerBoundUnit
+        in: query
+        description: list of lower bound units. Only required for currencies different
+          from EUR
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
+      - name: upperBoundUnit
+        in: query
+        description: list of upper bound units. Only required for currencies different
+          from EUR
+        style: pipeDelimited
+        schema:
+          type: array
+          items:
+            type: string
       - name: eventType
         in: query
         description: list of event types for event filtering (see user guide)
@@ -1620,6 +1643,7 @@ components:
       properties:
         name:
           type: string
+          description: name of row
         level:
           type: integer
           description: if the sheet is structured as a tree, indicates the depth of
