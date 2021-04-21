@@ -16082,7 +16082,7 @@ font-style: italic;
     <div class='model-description'>extra data item, typically provided by a 3rd party.</div>
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> common ids are: email, url, phone, fax, vatId, wz </div>
-<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> describing name in German language (for example, &quot;E-Mail&quot;) </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> describing name (for example, &quot;Email&quot; with English language settings, &quot;E-Mail&quot; with German language settigns) </div>
 <div class="param">value </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> actual value </div>
 <div class="param">formattedHtmlValue </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> value formatted as an HTML string </div>
     </div>  <!-- field-items -->
@@ -16111,12 +16111,12 @@ font-style: italic;
     <div class='model-description'>single financial number</div>
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> type of number (for example, revenue). Please see the document Finanz-Kennzahlentabelle for a complete list </div>
-<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name in German language (for example, Umsatz) </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name in current language (for example, Umsatz in German or Revenue in English) </div>
 <div class="param">value </div><div class="param-desc"><span class="param-type"><a href="#double">Double</a></span> actual value format: double</div>
 <div class="param">unit (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> unit or currency (EUR, % or empty) </div>
 <div class="param">estimate (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the value is not exact (because it relies on an estimate or an unsafe determination method) </div>
 <div class="param">note (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> optional note or comment with respect to the calculation of the financial </div>
-<div class="param">formattedValue </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> value formatted as a string (German number formatting conventions) </div>
+<div class="param">formattedValue </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> value formatted as a string (depending on the language settings) </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -16124,7 +16124,7 @@ font-style: italic;
     <div class='model-description'>financial data</div>
     <div class="field-items">
       <div class="param">date </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> reference date format: date</div>
-<div class="param">formattedDate </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> date formatted as a german string </div>
+<div class="param">formattedDate </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> date formatted as a string (depending on the language settings) </div>
 <div class="param">consolidated </div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the financial data refer to a consolidated balance (Konzernabschluss) </div>
 <div class="param">source (optional)</div><div class="param-desc"><span class="param-type"><a href="#FinancialsSource">FinancialsSource</a></span> source of financial data </div>
 <div class="param">items </div><div class="param-desc"><span class="param-type"><a href="#Financial">array[Financial]</a></span> list of financial numbers (maybe empty. If empty, see note for the reason) </div>
@@ -16316,9 +16316,9 @@ font-style: italic;
     <div class='model-description'>description of the type of a relation</div>
     <div class="field-items">
       <div class="param">date (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> date format: date</div>
-<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> German description </div>
-<div class="param">demotion (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation ends at the given date (e.g., &quot;Aussscheiden eines Geschäftsführers&quot;) </div>
-<div class="param">announce (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation might be preliminary (&quot;Ankündigung&quot;) </div>
+<div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> description (depending on the current language settings) </div>
+<div class="param">demotion (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation ends at the given date </div>
+<div class="param">announce (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation might be preliminary </div>
 <div class="param">type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal identifier </div>
 <div class="param">group </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal group identifier </div>
         <div class="param-enum-header">Enum:</div>
@@ -16403,7 +16403,7 @@ font-style: italic;
     <h3><a name="Topic"><code>Topic</code> - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'>topic of a publication</div>
     <div class="field-items">
-      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> German description (e.g., &quot;Stammkapital&quot;) </div>
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> textual description </div>
 <div class="param">value (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> accompanying value (e.g., €100.000,-) </div>
 <div class="param">type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal identificator for the topic </div>
     </div>  <!-- field-items -->
