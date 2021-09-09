@@ -85,6 +85,11 @@ paths:
         description: true to include related company and person data
         schema:
           type: boolean
+      - name: alwaysResolve
+        in: query
+        description: true to lookup current state of related company from database
+        schema:
+          type: boolean
       - name: sheets
         in: query
         description: true to include company financial sheets (balance, earnings)
@@ -248,7 +253,12 @@ paths:
           type: boolean
       - name: relations
         in: query
-        description: true to include related company data
+        description: true to include related company and person data
+        schema:
+          type: boolean
+      - name: alwaysResolve
+        in: query
+        description: true to lookup current state of related company from database
         schema:
           type: boolean
       - name: output
@@ -556,6 +566,11 @@ paths:
         description: true to include related company and person data
         schema:
           type: boolean
+      - name: alwaysResolve
+        in: query
+        description: true to lookup current state of related company from database
+        schema:
+          type: boolean
       - name: sheets
         in: query
         description: true to include company financial sheets (balance, earnings)
@@ -786,6 +801,11 @@ paths:
       - name: relations
         in: query
         description: true to include related company and person data
+        schema:
+          type: boolean
+      - name: alwaysResolve
+        in: query
+        description: true to lookup current state of related company from database
         schema:
           type: boolean
       - name: sheets
@@ -1868,5 +1888,11 @@ components:
       name: extras
       in: query
       description: true to include extra company data provided by 3rd parties
+      schema:
+        type: boolean
+    alwaysResolve:
+      name: alwaysResolve
+      in: query
+      description: true to lookup current state of related company from database
       schema:
         type: boolean
