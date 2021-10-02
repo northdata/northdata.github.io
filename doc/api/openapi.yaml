@@ -901,6 +901,8 @@ components:
           - terminated
         history:
           $ref: '#/components/schemas/CompanyHistory'
+        capital:
+          $ref: '#/components/schemas/Financials'
         financials:
           $ref: '#/components/schemas/Financials'
         mktgTechIndicators:
@@ -1060,6 +1062,8 @@ components:
           description: register entry history of a company
           items:
             $ref: '#/components/schemas/RegisterHistoryItem'
+        capital:
+          $ref: '#/components/schemas/Financials'
         financials:
           type: array
           description: historical financial data
