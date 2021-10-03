@@ -1063,7 +1063,10 @@ components:
           items:
             $ref: '#/components/schemas/RegisterHistoryItem'
         capital:
-          $ref: '#/components/schemas/Financials'
+          type: array
+          description: historical capital data
+          items:
+            $ref: '#/components/schemas/Financials'
         financials:
           type: array
           description: historical financial data
