@@ -105,10 +105,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -201,10 +201,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -266,10 +266,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -351,10 +351,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -459,10 +459,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -518,10 +518,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -629,10 +629,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -840,10 +840,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -1819,10 +1819,10 @@ components:
       description: response format
       schema:
         type: string
-        default: json
         enum:
         - json
         - xml
+        default: json
     history:
       name: history
       in: query
