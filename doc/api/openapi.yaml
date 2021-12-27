@@ -1343,7 +1343,8 @@ components:
           description: accompanying value (e.g., €100.000,-)
         type:
           type: string
-          description: internal identificator for the topic
+          description: internal identificator for the topic (for possible values,
+            see Appendix E of the user's guide)
       description: topic of a publication
     PublicationStructure:
       type: object
@@ -1356,18 +1357,11 @@ components:
       description: result of the structural analysis of a publication
     PublicationSource:
       type: string
-      description: "Source identifier:\n  * Hrb - Handelsregisterbekanntmachungen\n\
-        \  * Eb - Elektronischer Bundesanzeiger\n  * Ins - Insolvenzbekanntmachungen\n\
-        \  * Ut - Unternehmensträger (Handelsregister)\n  * Fk - Förderkatalog\n \
-        \ * Lei - Legal Entity Identifier \n  * Ler - Legal Entity Relationship\n\
-        \  * Bse - BaFin Besondere Stimmrechte, Emittent\n  * Bsg - BaFin Besondere\
-        \ Stimmrechte, Geschäft\n  * Fk - Förderkatalog\n  * Hsk - Hochschulkompass\n\
-        \  * Dp - DPMA German Patent and Trademark Office, Patents\n  * Dp - DPMA\
-        \ German Patent and Trademark Office, Trademarks\n  * Nd - North Data (manual\
-        \ corrections and bug fixes)\n"
+      description: "Source identifier, for a complete list see [Source reference](https://www.northdata.com/_coverage#sources)\
+        \ \n"
     EventType:
       type: string
-      description: event type
+      description: event type (for possible values, see Appendix G of the user's guide)
     Relation:
       required:
       - roles
@@ -1415,7 +1409,8 @@ components:
           description: true if the relation might be preliminary
         type:
           type: string
-          description: internal identifier
+          description: internal identifier (for possible values, see Appendix F of
+            the User's Guide)
         group:
           type: string
           description: internal group identifier
@@ -1436,6 +1431,10 @@ components:
           - Source
           - Target
           - Bi
+        sharesPercent:
+          type: number
+          description: shares in percent
+          format: double
       description: description of the type of a relation
     PersonName:
       required:
