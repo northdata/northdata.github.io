@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.156.0
+  version: 1.167.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
