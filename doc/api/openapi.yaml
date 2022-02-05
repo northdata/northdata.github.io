@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.167.0
+  version: 1.168.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -105,10 +105,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -201,10 +201,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -266,10 +266,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -351,10 +351,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -459,10 +459,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -518,10 +518,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -629,10 +629,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -840,10 +840,10 @@ paths:
         description: response format
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -1476,6 +1476,11 @@ components:
           description: Sometimes only the birth years is known, but not the exact
             date
           format: int32
+        birthMonth:
+          type: integer
+          description: Sometimes only birth year and month are known, but not the
+            exact date
+          format: int32
         deceased:
           type: boolean
           description: person is known to be dead
@@ -1821,10 +1826,10 @@ components:
       description: response format
       schema:
         type: string
+        default: json
         enum:
         - json
         - xml
-        default: json
     history:
       name: history
       in: query
