@@ -105,10 +105,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -179,6 +179,12 @@ paths:
           slow down response)
         schema:
           type: boolean
+      - name: attachments
+        in: query
+        description: whether to include publication attachments (binary, such as images
+          or PDF)
+        schema:
+          type: boolean
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
@@ -201,10 +207,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -266,10 +272,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -329,6 +335,12 @@ paths:
           slow down response)
         schema:
           type: boolean
+      - name: attachments
+        in: query
+        description: whether to include publication attachments (binary, such as images
+          or PDF)
+        schema:
+          type: boolean
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
@@ -351,10 +363,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -413,6 +425,12 @@ paths:
           slow down response)
         schema:
           type: boolean
+      - name: attachments
+        in: query
+        description: whether to include publication attachments (binary, such as images
+          or PDF)
+        schema:
+          type: boolean
       - name: publisherHistory
         in: query
         description: true to include historical data for the publisher
@@ -459,10 +477,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -518,10 +536,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -629,10 +647,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
@@ -840,10 +858,10 @@ paths:
         description: response format
         schema:
           type: string
-          default: json
           enum:
           - json
           - xml
+          default: json
       responses:
         "200":
           description: A successful response
@@ -883,7 +901,14 @@ components:
         subject:
           type: string
           description: subject according to register filing (also called corporate
-            object, purpose, Unternehmensgegenstand)
+            object, purpose, Unternehmensgegenstand), possibly translated
+        originalSubject:
+          type: string
+          description: subject according to register filing (also called corporate
+            object, purpose, Unternehmensgegenstand), in the original language
+        originalSubjectLang:
+          type: string
+          description: original language of the subject
         segmentCodes:
           type: object
           properties: {}
@@ -927,10 +952,19 @@ components:
           $ref: '#/components/schemas/Relations'
         relatedPersons:
           $ref: '#/components/schemas/Relations'
+        filings:
+          type: array
+          description: external source-specific IDs
+          items:
+            $ref: '#/components/schemas/Filing'
         blocked:
           type: boolean
           description: company data should not be publicly on the Internet because
             of a request for privacy protection
+        lastUpdateTime:
+          type: string
+          description: last time this company was updated
+          format: date-time
       description: All data for a particular company
     CompanyName:
       required:
@@ -971,6 +1005,9 @@ components:
       - id
       type: object
       properties:
+        type:
+          type: string
+          description: filing type
         name:
           type: string
           description: complete string
@@ -978,11 +1015,12 @@ components:
           $ref: '#/components/schemas/PublicationSource'
         city:
           type: string
-          description: city of the register court (e.g. Charlottenburg)
+          description: city (only for German insolvency filings)
         id:
           type: string
-          description: ID of the court filing (e.g., 36w IN 3284/16)
-      description: Court Filing (e.g., Insolvenzgericht Charlottenburg 36w IN 3284/16)
+          description: external ID (e.g., 36w IN 3284/16 for insolvency filings)
+      description: Filings are external IDs that are used by an external source (for
+        example the insolvency filing ID for the Ins source)
     Address:
       required:
       - city
@@ -1325,9 +1363,14 @@ components:
           $ref: '#/components/schemas/Relations'
         filings:
           type: array
-          description: 'court filings (currently only: insolvency filings)'
+          description: external filing IDs (e.g. insolvency filing IDs)
           items:
             $ref: '#/components/schemas/Filing'
+        attachments:
+          type: array
+          description: additional binary content such as images or PDF
+          items:
+            $ref: '#/components/schemas/Attachment'
         blocked:
           type: boolean
           description: publication data should not be publicly on the Internet because
@@ -1493,10 +1536,19 @@ components:
           description: North data web page for this person
         relatedCompanies:
           $ref: '#/components/schemas/Relations'
+        filings:
+          type: array
+          description: external source-specific IDs
+          items:
+            $ref: '#/components/schemas/Filing'
         blocked:
           type: boolean
           description: person data should not be publicly on the Internet because
             of a request for privacy protection
+        lastUpdateTime:
+          type: string
+          description: last time this person was updated
+          format: date-time
     GenericResponse:
       type: object
       properties:
@@ -1698,6 +1750,23 @@ components:
           description: numeric value
           format: double
       description: cell of a sheet
+    Attachment:
+      required:
+      - contentType
+      - name
+      - url
+      type: object
+      properties:
+        name:
+          type: string
+          description: name of attachment
+        url:
+          type: string
+          description: url to download from (link will be valid for 3 days)
+        contentType:
+          type: string
+          description: mime type
+      description: binary content related to a publication
   parameters:
     companyName:
       name: name
@@ -1797,6 +1866,13 @@ components:
         down response)
       schema:
         type: boolean
+    attachments:
+      name: attachments
+      in: query
+      description: whether to include publication attachments (binary, such as images
+        or PDF)
+      schema:
+        type: boolean
     censor:
       name: censor
       in: query
@@ -1830,10 +1906,10 @@ components:
       description: response format
       schema:
         type: string
-        default: json
         enum:
         - json
         - xml
+        default: json
     history:
       name: history
       in: query
