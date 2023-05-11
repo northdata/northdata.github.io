@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.184.1
+  version: 1.185.1
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -1150,6 +1150,18 @@ definitions:
         description: shares in percent
         type: number
         format: double
+      sharesNominal:
+        type: object
+        description: nominal shares
+        required: [ "value", "unit" ]
+        properties:
+          value:
+            type: number
+            format: double
+            description: actual value
+          unit:
+            type: string
+            description: unit or currency (EUR, % or empty)
   PersonName:
     type: object
     properties:
