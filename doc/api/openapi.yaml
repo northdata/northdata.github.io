@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.185.1
+  version: 1.193.3
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -872,6 +872,44 @@ paths:
             application/xml:
               schema:
                 $ref: '#/components/schemas/SearchResults'
+  /billing/v1/requests:
+    get:
+      description: number of unique requests
+      parameters:
+      - name: year
+        in: query
+        description: year of the billing period (>= 2024)
+        schema:
+          minimum: 2024
+          type: integer
+          format: int32
+      - name: month
+        in: query
+        description: month of the billing period between 1 (January) and 12 ( December)
+        schema:
+          maximum: 12
+          minimum: 1
+          type: integer
+          format: int32
+      - name: output
+        in: query
+        description: response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Billing'
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Billing'
 components:
   schemas:
     Company:
@@ -1792,6 +1830,22 @@ components:
           type: string
           description: mime type
       description: binary content related to a publication
+    Billing:
+      type: object
+      properties:
+        periodStart:
+          type: string
+          description: begin of the billing period
+          format: date
+        periodEnd:
+          type: string
+          description: end of the billing period
+          format: date
+        numberOfRequests:
+          type: integer
+          description: number of unique requests
+          format: int32
+      description: number of requests in billing period
   parameters:
     companyName:
       name: name
@@ -2010,3 +2064,20 @@ components:
       description: true to lookup current state of related company from database
       schema:
         type: boolean
+    billingYear:
+      name: year
+      in: query
+      description: year of the billing period (>= 2024)
+      schema:
+        minimum: 2024
+        type: integer
+        format: int32
+    billingMonth:
+      name: month
+      in: query
+      description: month of the billing period between 1 (January) and 12 ( December)
+      schema:
+        maximum: 12
+        minimum: 1
+        type: integer
+        format: int32
