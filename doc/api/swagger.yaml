@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.193.3
+  version: 1.193.5
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -651,6 +651,10 @@ definitions:
       segmentCodes:
         type: object
         description: 'each property (naics, isic, nace, wz, uksic) contains a list of segment codes in respective standard classification'
+        additionalProperties:
+          type: array
+          items: 
+            type: string
       northDataUrl:
         type: string
         description: North data web page for this company

@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.193.3
+  version: 1.193.5
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -17,98 +17,148 @@ paths:
       - name: name
         in: query
         description: company name
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: address
         in: query
         description: company address (you only need to specify the city)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: registerId
         in: query
-        description: the ID of under which the company is registered, for example
-          HRB 12345
+        description: "the ID of under which the company is registered, for example\
+          \ HRB 12345"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: registerCity
         in: query
-        description: the city of the court where the company is registered, for example
-          Hamburg
+        description: "the city of the court where the company is registered, for example\
+          \ Hamburg"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: companyId
         in: query
-        description: internal company id (do not store this id in an external database,
-          it may change over time)
+        description: "internal company id (do not store this id in an external database,\
+          \ it may change over time)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: fuzzyMatch
         in: query
         description: true to find best match (similar name and nearby address)
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: registerKey
         in: query
         description: key that has been provided via the register uniqueKey field
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: history
         in: query
         description: true to include historical data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: financials
         in: query
         description: true to include financial data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: events
         in: query
         description: true to include event data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: eventTypes
         in: query
         description: restrict which event types wille be returned if events equals
           true
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: maxEvents
         in: query
         description: maximum number of events to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: relations
         in: query
         description: true to include related company and person data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: alwaysResolve
         in: query
         description: true to lookup current state of related company from database
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: sheets
         in: query
-        description: true to include company financial sheets (balance, earnings)
+        description: "true to include company financial sheets (balance, earnings)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: extras
         in: query
         description: true to include extra company data provided by 3rd parties
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -126,91 +176,134 @@ paths:
       - name: name
         in: query
         description: company name
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: address
         in: query
         description: company address (you only need to specify the city)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: registerId
         in: query
-        description: the ID of under which the company is registered, for example
-          HRB 12345
+        description: "the ID of under which the company is registered, for example\
+          \ HRB 12345"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: registerCity
         in: query
-        description: the city of the court where the company is registered, for example
-          Hamburg
+        description: "the city of the court where the company is registered, for example\
+          \ Hamburg"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: companyId
         in: query
-        description: internal company id (do not store this id in an external database,
-          it may change over time)
+        description: "internal company id (do not store this id in an external database,\
+          \ it may change over time)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: fuzzyMatch
         in: query
         description: true to find best match (similar name and nearby address)
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: registerKey
         in: query
         description: key that has been provided via the register uniqueKey field
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: sources
         in: query
         description: DEPRECATED (will be removed at some point of time)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: source
         in: query
         description: only publications with this source will be returned
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
           slow down response)
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: attachments
         in: query
-        description: whether to include publication attachments (binary, such as images
-          or PDF)
+        description: "whether to include publication attachments (binary, such as\
+          \ images or PDF)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: offset
         in: query
         description: offset of first item to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: limit
         in: query
         description: maximum number of items to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -228,54 +321,81 @@ paths:
       - name: firstName
         in: query
         description: first name(s) of a person
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: lastName
         in: query
         description: last name of a person
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: address
         in: query
         description: person address (you only need to specify the city)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: birthDate
         in: query
         description: birth date
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date
       - name: personId
         in: query
-        description: internal person id (do not store this id in an external database,
-          it may change over time)
+        description: "internal person id (do not store this id in an external database,\
+          \ it may change over time)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: history
         in: query
         description: true to include historical data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: relations
         in: query
         description: true to include related company and person data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: alwaysResolve
         in: query
         description: true to lookup current state of related company from database
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -293,80 +413,117 @@ paths:
       - name: firstName
         in: query
         description: first name(s) of a person
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: lastName
         in: query
         description: last name of a person
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: address
         in: query
         description: person address (you only need to specify the city)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: birthDate
         in: query
         description: birth date
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date
       - name: personId
         in: query
-        description: internal person id (do not store this id in an external database,
-          it may change over time)
+        description: "internal person id (do not store this id in an external database,\
+          \ it may change over time)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: sources
         in: query
         description: DEPRECATED (will be removed at some point of time)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: source
         in: query
         description: only publications with this source will be returned
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
           slow down response)
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: attachments
         in: query
-        description: whether to include publication attachments (binary, such as images
-          or PDF)
+        description: "whether to include publication attachments (binary, such as\
+          \ images or PDF)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: offset
         in: query
         description: offset of first item to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: limit
         in: query
         description: maximum number of items to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -379,108 +536,157 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
   /pub/v1/publications:
     get:
-      description: Retrieve publications. At most 10 publications are returned with
-        each call. For more, repeat the call setting the pos parameter to the newPos
-        attribute value of the response.
+      description: "Retrieve publications. At most 10 publications are returned with\
+        \ each call. For more, repeat the call setting the pos parameter to the newPos\
+        \ attribute value of the response."
       parameters:
       - name: minTimestamp
         in: query
         description: minimum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date-time
       - name: maxTimestamp
         in: query
         description: maximum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date-time
       - name: minDate
         in: query
         description: DEPRECATED - please use minTimestamp instead
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date
       - name: maxDate
         in: query
         description: DEPRECATED - please use maxTimestamp instead
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
           format: date
       - name: sources
         in: query
         description: DEPRECATED (will be removed at some point of time)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: source
         in: query
         description: only publications with this source will be returned
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: content
         in: query
         description: whether to include publication text / html (may significantly
           slow down response)
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: attachments
         in: query
-        description: whether to include publication attachments (binary, such as images
-          or PDF)
+        description: "whether to include publication attachments (binary, such as\
+          \ images or PDF)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherHistory
         in: query
         description: true to include historical data for the publisher
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherFinancials
         in: query
         description: true to include financial data for the publisher
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherRelations
         in: query
         description: true to include related company and person data for the publisher
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherEvents
         in: query
         description: true to include event data for the publisher
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherExtras
         in: query
         description: true to include extra publisher data provided by 3rd parties
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: publisherSheets
         in: query
-        description: true to include publisher sheets (balance, earnings)
+        description: "true to include publisher sheets (balance, earnings)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: pos
         in: query
-        description: if additional results shall be downloaded, set this to the value
-          of the newPos attribute of the previous response
+        description: "if additional results shall be downloaded, set this to the value\
+          \ of the newPos attribute of the previous response"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -493,110 +699,162 @@ paths:
                 $ref: '#/components/schemas/GenericResponse'
   /search/v1/universal:
     get:
-      description: 'universal search: provides best company and person matches for
-        given input query'
+      description: "universal search: provides best company and person matches for\
+        \ given input query"
       parameters:
       - name: query
         in: query
         description: the query string
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: domain
         in: query
-        description: set to "company" for companies only, "person" for persons only,
-          otherwise leave empty
+        description: "set to \"company\" for companies only, \"person\" for persons\
+          \ only, otherwise leave empty"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: pos
         in: query
-        description: if additional results shall be downloaded, set this to the value
-          of the newPos attribute of the previous response
+        description: "if additional results shall be downloaded, set this to the value\
+          \ of the newPos attribute of the previous response"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: offset
         in: query
         description: offset of first item to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: limit
         in: query
         description: maximum number of items to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
           all countries)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: status
         in: query
-        description: list of valid statuses (active, terminated, liquidation)
+        description: "list of valid statuses (active, terminated, liquidation)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: history
         in: query
         description: true to include historical data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: financials
         in: query
         description: true to include financial data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: events
         in: query
         description: true to include event data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: eventTypes
         in: query
         description: restrict which event types wille be returned if events equals
           true
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: maxEvents
         in: query
         description: maximum number of events to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: relations
         in: query
         description: true to include related company and person data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: alwaysResolve
         in: query
         description: true to lookup current state of related company from database
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: sheets
         in: query
-        description: true to include company financial sheets (balance, earnings)
+        description: "true to include company financial sheets (balance, earnings)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: extras
         in: query
         description: true to include extra company data provided by 3rd parties
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       responses:
@@ -611,55 +869,78 @@ paths:
                 $ref: '#/components/schemas/SearchResults'
   /search/v1/suggest:
     get:
-      description: 'auto complete: provides quick company and person suggestions for
-        given input query'
+      description: "auto complete: provides quick company and person suggestions for\
+        \ given input query"
       parameters:
       - name: query
         in: query
         description: the query string
         required: true
+        style: form
+        explode: true
         schema:
           type: string
       - name: domain
         in: query
-        description: '"company" to match companies only, "person" to match persons
-          only, empty to match all'
+        description: "\"company\" to match companies only, \"person\" to match persons\
+          \ only, empty to match all"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: history
         in: query
         description: true to include former company names
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: limit
         in: query
         description: maximum number of items to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
           all countries)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: status
         in: query
-        description: list of valid statuses (active, terminated, liquidation)
+        description: "list of valid statuses (active, terminated, liquidation)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       responses:
@@ -674,43 +955,63 @@ paths:
                 $ref: '#/components/schemas/SearchResults'
   /search/v1/power:
     get:
-      description: 'power search: supports geo and financial criteria'
+      description: "power search: supports geo and financial criteria"
       parameters:
       - name: keywords
         in: query
         description: keywords to match in the company's subject
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: address
         in: query
         description: address or geo coordinates
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: maxDistanceKm
         in: query
         description: maximum distance from given address
+        required: false
+        style: form
+        explode: true
         schema:
           type: number
           format: double
       - name: legalForm
         in: query
         description: list of legal forms
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: segmentCodeStandard
         in: query
         description: name of the segment code standard to use
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: segmentCodes
         in: query
         description: list of segment codes
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: indicatorId
         in: query
         description: list of indicator ids for performance filtering (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -718,7 +1019,9 @@ paths:
       - name: lowerBound
         in: query
         description: list of lower bounds for performance filterings  (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -727,7 +1030,9 @@ paths:
       - name: upperBound
         in: query
         description: list of upper bounds for performance filterings  (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -737,7 +1042,9 @@ paths:
         in: query
         description: list of lower bound units. Only required for currencies different
           from EUR
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -746,7 +1053,9 @@ paths:
         in: query
         description: list of upper bound units. Only required for currencies different
           from EUR
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -754,7 +1063,9 @@ paths:
       - name: eventType
         in: query
         description: list of event types for event filtering (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -762,7 +1073,9 @@ paths:
       - name: minDate
         in: query
         description: list of minimum dates for event filterings  (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -771,7 +1084,9 @@ paths:
       - name: maxDate
         in: query
         description: list of maximum dates for event filterings  (see user guide)
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
           items:
@@ -781,87 +1096,131 @@ paths:
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
           all countries)
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: status
         in: query
-        description: list of valid statuses (active, terminated, liquidation)
+        description: "list of valid statuses (active, terminated, liquidation)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: history
         in: query
         description: true to include historical data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: financials
         in: query
         description: true to include financial data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: events
         in: query
         description: true to include event data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: eventTypes
         in: query
         description: restrict which event types wille be returned if events equals
           true
+        required: false
         style: pipeDelimited
+        explode: false
         schema:
           type: array
       - name: maxEvents
         in: query
         description: maximum number of events to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: relations
         in: query
         description: true to include related company and person data
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: alwaysResolve
         in: query
         description: true to lookup current state of related company from database
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: sheets
         in: query
-        description: true to include company financial sheets (balance, earnings)
+        description: "true to include company financial sheets (balance, earnings)"
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: extras
         in: query
         description: true to include extra company data provided by 3rd parties
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: pos
         in: query
-        description: if additional results shall be downloaded, set this to the value
-          of the newPos attribute of the previous response
+        description: "if additional results shall be downloaded, set this to the value\
+          \ of the newPos attribute of the previous response"
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
       - name: censor
         in: query
         description: should be set when presenting the content on a public website
+        required: false
+        style: form
+        explode: true
         schema:
           type: boolean
       - name: limit
         in: query
         description: maximum number of items to return
+        required: false
+        style: form
+        explode: true
         schema:
           type: integer
           format: int32
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -879,6 +1238,9 @@ paths:
       - name: year
         in: query
         description: year of the billing period (>= 2024)
+        required: false
+        style: form
+        explode: true
         schema:
           minimum: 2024
           type: integer
@@ -886,6 +1248,9 @@ paths:
       - name: month
         in: query
         description: month of the billing period between 1 (January) and 12 ( December)
+        required: false
+        style: form
+        explode: true
         schema:
           maximum: 12
           minimum: 1
@@ -894,12 +1259,15 @@ paths:
       - name: output
         in: query
         description: response format
+        required: false
+        style: form
+        explode: true
         schema:
           type: string
+          default: json
           enum:
           - json
           - xml
-          default: json
       responses:
         "200":
           description: A successful response
@@ -922,8 +1290,8 @@ components:
       properties:
         id:
           type: string
-          description: internal company id (do not store this id in an external database,
-            it may change over time)
+          description: "internal company id (do not store this id in an external database,\
+            \ it may change over time)"
         name:
           $ref: '#/components/schemas/CompanyName'
         address:
@@ -938,24 +1306,27 @@ components:
           description: current entity legal form code according to ISO 20275
         subject:
           type: string
-          description: subject according to register filing (also called corporate
-            object, purpose, Unternehmensgegenstand), possibly translated
+          description: "subject according to register filing (also called corporate\
+            \ object, purpose, Unternehmensgegenstand), possibly translated"
         originalSubject:
           type: string
-          description: subject according to register filing (also called corporate
-            object, purpose, Unternehmensgegenstand), in the original language
+          description: "subject according to register filing (also called corporate\
+            \ object, purpose, Unternehmensgegenstand), in the original language"
         originalSubjectLang:
           type: string
           description: original language of the subject
         proxyPolicy:
           type: string
-          description: rules for representation by legal representatives (e.g., signatory
-            authority)
+          description: "rules for representation by legal representatives (e.g., signatory\
+            \ authority)"
         segmentCodes:
           type: object
-          properties: {}
-          description: each property (naics, isic, nace, wz, uksic) contains a list
-            of segment codes in respective standard classification
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: "each property (naics, isic, nace, wz, uksic) contains a list\
+            \ of segment codes in respective standard classification"
         northDataUrl:
           type: string
           description: North data web page for this company
@@ -964,8 +1335,8 @@ components:
           description: company has been terminated
         status:
           type: string
-          description: current status of the company, where liquidation is the intermediate
-            state before the final removal from the register (=terminated)
+          description: "current status of the company, where liquidation is the intermediate\
+            \ state before the final removal from the register (=terminated)"
           enum:
           - active
           - liquidation
@@ -1018,11 +1389,11 @@ components:
           description: name of a company
         legalForm:
           type: string
-          description: 'legal form (for example: A/S, AG, AG & Co. KG, AöR, Co. KG,
-            d.o.o., e. K., e. V., eG, EWIV, gAG, GbR, gGmbH, GmbH, GmbH & Co. KG,
-            gSE, gUG, Inh., InvAG, KG, KGaA, KGaA & Co. KG, Ltd., Ltd. & Co. KG, OHG,
-            PartGG, plc, REITG, S.L., SCE, SCE, SCE mbH, SE, SE & Co. KG, Stiftung
-            & Co. KG, UG, UG & Co. KG, VVaG)'
+          description: "legal form (for example: A/S, AG, AG & Co. KG, AöR, Co. KG,\
+            \ d.o.o., e. K., e. V., eG, EWIV, gAG, GbR, gGmbH, GmbH, GmbH & Co. KG,\
+            \ gSE, gUG, Inh., InvAG, KG, KGaA, KGaA & Co. KG, Ltd., Ltd. & Co. KG,\
+            \ OHG, PartGG, plc, REITG, S.L., SCE, SCE, SCE mbH, SE, SE & Co. KG, Stiftung\
+            \ & Co. KG, UG, UG & Co. KG, VVaG)"
     Register:
       required:
       - id
@@ -1041,7 +1412,7 @@ components:
           type: string
           description: unique numerical key for repeatably unique identification of
             the register entry
-      description: register entry information (e.g., Amtsgericht Hamburg HRB 9999)
+      description: "register entry information (e.g., Amtsgericht Hamburg HRB 9999)"
     Filing:
       required:
       - id
@@ -1060,7 +1431,7 @@ components:
           description: city (only for German insolvency filings)
         id:
           type: string
-          description: external ID (e.g., 36w IN 3284/16 for insolvency filings)
+          description: "external ID (e.g., 36w IN 3284/16 for insolvency filings)"
       description: Filings are external IDs that are used by an external source (for
         example the insolvency filing ID for the Ins source)
     Address:
@@ -1089,11 +1460,11 @@ components:
           description: two-letter ISO country code
         lat:
           type: number
-          description: geo coordinates, latitude part
+          description: "geo coordinates, latitude part"
           format: double
         lng:
           type: number
-          description: geo coordinates, longitude part
+          description: "geo coordinates, longitude part"
           format: double
         formattedValue:
           type: string
@@ -1207,8 +1578,8 @@ components:
           $ref: '#/components/schemas/FinancialsSource'
         items:
           type: array
-          description: list of financial numbers (maybe empty. If empty, see note
-            for the reason)
+          description: "list of financial numbers (maybe empty. If empty, see note\
+            \ for the reason)"
           items:
             $ref: '#/components/schemas/Financial'
         note:
@@ -1224,20 +1595,20 @@ components:
       properties:
         id:
           type: string
-          description: type of number (for example, revenue). Please see the  [indicator
-            reference](https://www.northdata.com/_coverage#indicators) for a complete
-            list
+          description: "type of number (for example, revenue). Please see the  [indicator\
+            \ reference](https://www.northdata.com/_coverage#indicators) for a complete\
+            \ list"
         name:
           type: string
-          description: name in current language (for example, Umsatz in German or
-            Revenue in English)
+          description: "name in current language (for example, Umsatz in German or\
+            \ Revenue in English)"
         value:
           type: number
           description: actual value
           format: double
         unit:
           type: string
-          description: unit or currency (EUR, % or empty)
+          description: "unit or currency (EUR, % or empty)"
         estimate:
           type: boolean
           description: true if the value is not exact (because it relies on an estimate
@@ -1303,7 +1674,7 @@ components:
           description: text
         contentType:
           type: string
-          description: content format, usually "text/html"
+          description: "content format, usually \"text/html\""
       description: excerpts from an original publication
     Extras:
       type: object
@@ -1319,7 +1690,7 @@ components:
           description: extra data items in this set
           items:
             $ref: '#/components/schemas/Extra'
-      description: set of additional data, typically provided by 3rd parties.
+      description: "set of additional data, typically provided by 3rd parties."
     Extra:
       required:
       - formattedHtmlValue
@@ -1330,18 +1701,18 @@ components:
       properties:
         id:
           type: string
-          description: 'common ids are: email, url, phone, fax, vatId, wz'
+          description: "common ids are: email, url, phone, fax, vatId, wz"
         name:
           type: string
-          description: describing name (for example, "Email" with English language
-            settings, "E-Mail" with German language settigns)
+          description: "describing name (for example, \"Email\" with English language\
+            \ settings, \"E-Mail\" with German language settigns)"
         value:
           type: string
           description: actual value
         formattedHtmlValue:
           type: string
           description: value formatted as an HTML string
-      description: extra data item, typically provided by a 3rd party.
+      description: "extra data item, typically provided by a 3rd party."
     Publication:
       required:
       - date
@@ -1359,8 +1730,8 @@ components:
           format: date
         effectiveDate:
           type: string
-          description: date when published changes became effective (e.g., appointment
-            of new director)
+          description: "date when published changes became effective (e.g., appointment\
+            \ of new director)"
           format: date
         creationTime:
           type: string
@@ -1381,8 +1752,8 @@ components:
           description: ISO language code
         language:
           type: string
-          description: ISO language code. This is different from the original language,
-            for translations only.
+          description: "ISO language code. This is different from the original language,\
+            \ for translations only."
         title:
           type: string
           description: title of publication
@@ -1432,11 +1803,11 @@ components:
           description: textual description
         value:
           type: string
-          description: accompanying value (e.g., €100.000,-)
+          description: "accompanying value (e.g., €100.000,-)"
         type:
           type: string
-          description: internal identificator for the topic (for possible values,
-            see Appendix E of the user's guide)
+          description: "internal identificator for the topic (for possible values,\
+            \ see Appendix E of the user's guide)"
       description: topic of a publication
     PublicationStructure:
       type: object
@@ -1453,7 +1824,8 @@ components:
         \ \n"
     EventType:
       type: string
-      description: event type (for possible values, see Appendix G of the user's guide)
+      description: "event type (for possible values, see Appendix G of the user's\
+        \ guide)"
     Relation:
       required:
       - roles
@@ -1507,8 +1879,8 @@ components:
           description: true if the relation might be preliminary
         type:
           type: string
-          description: internal identifier (for possible values, see Appendix F of
-            the User's Guide)
+          description: "internal identifier (for possible values, see Appendix F of\
+            \ the User's Guide)"
         group:
           type: string
           description: internal group identifier
@@ -1521,10 +1893,10 @@ components:
           - Interest
         dir:
           type: string
-          description: Direction. The exact interpretation depends of the value of
-            the field "group". Case "succession" - older company is "Source". Case
-            "merger" - Sold company is "Source", Buyer is target "Target". Case "control"
-            - controlling company is "Source".
+          description: "Direction. The exact interpretation depends of the value of\
+            \ the field \"group\". Case \"succession\" - older company is \"Source\"\
+            . Case \"merger\" - Sold company is \"Source\", Buyer is target \"Target\"\
+            . Case \"control\" - controlling company is \"Source\"."
           enum:
           - None
           - Source
@@ -1535,19 +1907,7 @@ components:
           description: shares in percent
           format: double
         sharesNominal:
-          required:
-          - unit
-          - value
-          type: object
-          properties:
-            value:
-              type: number
-              description: actual value
-              format: double
-            unit:
-              type: string
-              description: unit or currency (EUR, % or empty)
-          description: nominal shares
+          $ref: '#/components/schemas/Role_sharesNominal'
       description: description of the type of a relation
     PersonName:
       required:
@@ -1571,8 +1931,8 @@ components:
       properties:
         id:
           type: string
-          description: internal person id (do not store this id in an external database,
-            it may change over time)
+          description: "internal person id (do not store this id in an external database,\
+            \ it may change over time)"
         name:
           $ref: '#/components/schemas/PersonName'
         address:
@@ -1583,13 +1943,13 @@ components:
           format: date
         birthYear:
           type: integer
-          description: Sometimes only the birth years is known, but not the exact
-            date
+          description: "Sometimes only the birth years is known, but not the exact\
+            \ date"
           format: int32
         birthMonth:
           type: integer
-          description: Sometimes only birth year and month are known, but not the
-            exact date
+          description: "Sometimes only birth year and month are known, but not the\
+            \ exact date"
           format: int32
         deceased:
           type: boolean
@@ -1645,8 +2005,8 @@ components:
           description: position to retrieve next batch of results
         total:
           type: integer
-          description: total number of results (usually, this number is not available,
-            unfortunately)
+          description: "total number of results (usually, this number is not available,\
+            \ unfortunately)"
           format: int32
       description: search results
     SearchResult:
@@ -1661,7 +2021,7 @@ components:
         matchedName:
           type: string
           description: the matched name (useful if a company has been renamed)
-      description: company, person or publication that is result of a search
+      description: "company, person or publication that is result of a search"
     Money:
       required:
       - amount
@@ -1770,9 +2130,9 @@ components:
           - GAAP
         unit:
           type: string
-          description: unit or currency (EUR, % or empty)
-      description: represents balance sheets, profit and loss statements, and similar
-        structures
+          description: "unit or currency (EUR, % or empty)"
+      description: "represents balance sheets, profit and loss statements, and similar\
+        \ structures"
     SheetColumnHeader:
       required:
       - date
@@ -1796,8 +2156,8 @@ components:
           description: name of row
         level:
           type: integer
-          description: if the sheet is structured as a tree, indicates the depth of
-            the nesting of this row.
+          description: "if the sheet is structured as a tree, indicates the depth\
+            \ of the nesting of this row."
           format: int32
         cells:
           type: array
@@ -1846,89 +2206,141 @@ components:
           description: number of unique requests
           format: int32
       description: number of requests in billing period
+    Role_sharesNominal:
+      required:
+      - unit
+      - value
+      type: object
+      properties:
+        value:
+          type: number
+          description: actual value
+          format: double
+        unit:
+          type: string
+          description: "unit or currency (EUR, % or empty)"
+      description: nominal shares
   parameters:
     companyName:
       name: name
       in: query
       description: company name
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     companyAddress:
       name: address
       in: query
       description: company address (you only need to specify the city)
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     companyRegisterCity:
       name: registerCity
       in: query
-      description: the city of the court where the company is registered, for example
-        Hamburg
+      description: "the city of the court where the company is registered, for example\
+        \ Hamburg"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     companyRegisterId:
       name: registerId
       in: query
-      description: the ID of under which the company is registered, for example HRB
-        12345
+      description: "the ID of under which the company is registered, for example HRB\
+        \ 12345"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     companyId:
       name: companyId
       in: query
-      description: internal company id (do not store this id in an external database,
-        it may change over time)
+      description: "internal company id (do not store this id in an external database,\
+        \ it may change over time)"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     fuzzyMatch:
       name: fuzzyMatch
       in: query
       description: true to find best match (similar name and nearby address)
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     registerKey:
       name: registerKey
       in: query
       description: key that has been provided via the register uniqueKey field
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     personFirstName:
       name: firstName
       in: query
       description: first name(s) of a person
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     personLastName:
       name: lastName
       in: query
       description: last name of a person
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     personAddress:
       name: address
       in: query
       description: person address (you only need to specify the city)
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     birthDate:
       name: birthDate
       in: query
       description: birth date
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
         format: date
     personId:
       name: personId
       in: query
-      description: internal person id (do not store this id in an external database,
-        it may change over time)
+      description: "internal person id (do not store this id in an external database,\
+        \ it may change over time)"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     sources:
       name: sources
       in: query
       description: DEPRECATED (will be removed at some point of time)
+      required: false
       style: pipeDelimited
+      explode: false
       schema:
         type: array
     source:
@@ -1936,6 +2348,8 @@ components:
       in: query
       description: only publications with this source will be returned
       required: true
+      style: form
+      explode: true
       schema:
         type: string
     content:
@@ -1943,25 +2357,37 @@ components:
       in: query
       description: whether to include publication text / html (may significantly slow
         down response)
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     attachments:
       name: attachments
       in: query
-      description: whether to include publication attachments (binary, such as images
-        or PDF)
+      description: "whether to include publication attachments (binary, such as images\
+        \ or PDF)"
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     censor:
       name: censor
       in: query
       description: should be set when presenting the content on a public website
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     offset:
       name: offset
       in: query
       description: offset of first item to return
+      required: false
+      style: form
+      explode: true
       schema:
         type: integer
         format: int32
@@ -1969,61 +2395,87 @@ components:
       name: limit
       in: query
       description: maximum number of items to return
+      required: false
+      style: form
+      explode: true
       schema:
         type: integer
         format: int32
     pos:
       name: pos
       in: query
-      description: if additional results shall be downloaded, set this to the value
-        of the newPos attribute of the previous response
+      description: "if additional results shall be downloaded, set this to the value\
+        \ of the newPos attribute of the previous response"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     output:
       name: output
       in: query
       description: response format
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
+        default: json
         enum:
         - json
         - xml
-        default: json
     history:
       name: history
       in: query
       description: true to include historical data
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     financials:
       name: financials
       in: query
       description: true to include financial data
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     mktgtech:
       name: mktgtech
       in: query
       description: true to include marketing & technology indicators
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     events:
       name: events
       in: query
       description: true to include event data
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     eventTypes:
       name: eventTypes
       in: query
       description: restrict which event types wille be returned if events equals true
+      required: false
       style: pipeDelimited
+      explode: false
       schema:
         type: array
     maxEvents:
       name: maxEvents
       in: query
       description: maximum number of events to return
+      required: false
+      style: form
+      explode: true
       schema:
         type: integer
         format: int32
@@ -2031,6 +2483,9 @@ components:
       name: relations
       in: query
       description: true to include related company and person data
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     countries:
@@ -2038,36 +2493,54 @@ components:
       in: query
       description: list of country ISO codes to restrict result set (empty to retrieve
         all countries)
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     status:
       name: status
       in: query
-      description: list of valid statuses (active, terminated, liquidation)
+      description: "list of valid statuses (active, terminated, liquidation)"
+      required: false
+      style: form
+      explode: true
       schema:
         type: string
     sheets:
       name: sheets
       in: query
-      description: true to include company financial sheets (balance, earnings)
+      description: "true to include company financial sheets (balance, earnings)"
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     extras:
       name: extras
       in: query
       description: true to include extra company data provided by 3rd parties
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     alwaysResolve:
       name: alwaysResolve
       in: query
       description: true to lookup current state of related company from database
+      required: false
+      style: form
+      explode: true
       schema:
         type: boolean
     billingYear:
       name: year
       in: query
       description: year of the billing period (>= 2024)
+      required: false
+      style: form
+      explode: true
       schema:
         minimum: 2024
         type: integer
@@ -2076,8 +2549,12 @@ components:
       name: month
       in: query
       description: month of the billing period between 1 (January) and 12 ( December)
+      required: false
+      style: form
+      explode: true
       schema:
         maximum: 12
         minimum: 1
         type: integer
         format: int32
+x-original-swagger-version: "2.0"
