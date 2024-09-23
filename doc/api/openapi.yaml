@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.193.6
+  version: 1.196.29
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -540,6 +540,14 @@ paths:
         \ each call. For more, repeat the call setting the pos parameter to the newPos\
         \ attribute value of the response."
       parameters:
+      - name: id
+        in: query
+        description: publication id to get a single publication
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
       - name: minTimestamp
         in: query
         description: minimum datetime publication was added to the database
@@ -1294,6 +1302,10 @@ components:
             \ it may change over time)"
         name:
           $ref: '#/components/schemas/CompanyName'
+        rawName:
+          type: string
+          description: May provide the raw name found in register sources before applying
+            normalizations and spelling fixes
         address:
           $ref: '#/components/schemas/Address'
         register:
@@ -1301,6 +1313,9 @@ components:
         lei:
           type: string
           description: International Legal Entity Identifier (LEI)
+        euId:
+          type: string
+          description: European Unique Identifier (EUID)
         elfCode:
           type: string
           description: current entity legal form code according to ISO 20275

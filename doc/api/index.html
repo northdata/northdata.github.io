@@ -183,7 +183,7 @@ font-style: italic;
     <div class="app-desc">Programmatic access to the North Data DB.</div>
     <div class="app-desc">More information: <a href="https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md">https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md</a></div>
     <div class="app-desc">Contact Info: <a href="support@northdata.de">support@northdata.de</a></div>
-    <div class="app-desc">Version: 1.193.6</div>
+    <div class="app-desc">Version: 1.196.29</div>
     <div class="app-desc">BasePath:/_api</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -550,7 +550,9 @@ font-style: italic;
 
     <h3 class="field-label">Query parameters</h3>
     <div class="field-items">
-      <div class="param">minTimestamp (optional)</div>
+      <div class="param">id (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; publication id to get a single publication </div><div class="param">minTimestamp (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; minimum datetime publication was added to the database format: date-time</div><div class="param">maxTimestamp (optional)</div>
 
@@ -950,9 +952,11 @@ font-style: italic;
     <div class="field-items">
       <div class="param">id </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal company id (do not store this id in an external database, it may change over time) </div>
 <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#CompanyName">CompanyName</a></span> name of the company </div>
+<div class="param">rawName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> May provide the raw name found in register sources before applying normalizations and spelling fixes </div>
 <div class="param">address </div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span> current address </div>
 <div class="param">register (optional)</div><div class="param-desc"><span class="param-type"><a href="#Register">Register</a></span> register information </div>
 <div class="param">lei (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> International Legal Entity Identifier (LEI) </div>
+<div class="param">euId (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> European Unique Identifier (EUID) </div>
 <div class="param">elfCode (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> current entity legal form code according to ISO 20275 </div>
 <div class="param">subject (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> subject according to register filing (also called corporate object, purpose, Unternehmensgegenstand), possibly translated </div>
 <div class="param">originalSubject (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> subject according to register filing (also called corporate object, purpose, Unternehmensgegenstand), in the original language </div>
