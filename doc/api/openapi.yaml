@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.196.29
+  version: 0.0.0-SNAPSHOT
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -1730,7 +1730,6 @@ components:
       description: "extra data item, typically provided by a 3rd party."
     Publication:
       required:
-      - date
       - id
       - source
       - title
