@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.196.71
+  version: 1.232.10
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -232,6 +232,42 @@ paths:
         explode: true
         schema:
           type: string
+      - name: minTimestamp
+        in: query
+        description: minimum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: maxTimestamp
+        in: query
+        description: maximum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: minPublicationDate
+        in: query
+        description: minimum date publication was published on (by the source)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: maxPublicationDate
+        in: query
+        description: maximum date publication was published on (by the source)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
       - name: sources
         in: query
         description: DEPRECATED (will be removed at some point of time)
@@ -452,6 +488,42 @@ paths:
         explode: true
         schema:
           type: string
+      - name: minTimestamp
+        in: query
+        description: minimum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: maxTimestamp
+        in: query
+        description: maximum datetime publication was added to the database
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      - name: minPublicationDate
+        in: query
+        description: minimum date publication was published on (by the source)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: maxPublicationDate
+        in: query
+        description: maximum date publication was published on (by the source)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
       - name: sources
         in: query
         description: DEPRECATED (will be removed at some point of time)
@@ -548,6 +620,24 @@ paths:
         explode: true
         schema:
           type: string
+      - name: minDate
+        in: query
+        description: DEPRECATED - please use minTimestamp or minPublicationDate instead
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
+      - name: maxDate
+        in: query
+        description: DEPRECATED - please use maxTimestamp or maxPublicationDate instead
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date
       - name: minTimestamp
         in: query
         description: minimum datetime publication was added to the database
@@ -566,18 +656,18 @@ paths:
         schema:
           type: string
           format: date-time
-      - name: minDate
+      - name: minPublicationDate
         in: query
-        description: DEPRECATED - please use minTimestamp instead
+        description: minimum date publication was published on (by the source)
         required: false
         style: form
         explode: true
         schema:
           type: string
           format: date
-      - name: maxDate
+      - name: maxPublicationDate
         in: query
-        description: DEPRECATED - please use maxTimestamp instead
+        description: maximum date publication was published on (by the source)
         required: false
         style: form
         explode: true
@@ -730,7 +820,7 @@ paths:
       - name: pos
         in: query
         description: "if additional results shall be downloaded, set this to the value\
-          \ of the newPos attribute of the previous response"
+          \ of the nextPos attribute of the previous response"
         required: false
         style: form
         explode: true
@@ -913,6 +1003,15 @@ paths:
         explode: true
         schema:
           type: boolean
+      - name: offset
+        in: query
+        description: offset of first item to return
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
       - name: limit
         in: query
         description: maximum number of items to return
@@ -1194,7 +1293,7 @@ paths:
       - name: pos
         in: query
         description: "if additional results shall be downloaded, set this to the value\
-          \ of the newPos attribute of the previous response"
+          \ of the nextPos attribute of the previous response"
         required: false
         style: form
         explode: true
@@ -2348,6 +2447,46 @@ components:
       explode: true
       schema:
         type: string
+    minPublicationDate:
+      name: minPublicationDate
+      in: query
+      description: minimum date publication was published on (by the source)
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date
+    maxPublicationDate:
+      name: maxPublicationDate
+      in: query
+      description: maximum date publication was published on (by the source)
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date
+    minTimestamp:
+      name: minTimestamp
+      in: query
+      description: minimum datetime publication was added to the database
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date-time
+    maxTimestamp:
+      name: maxTimestamp
+      in: query
+      description: maximum datetime publication was added to the database
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: string
+        format: date-time
     sources:
       name: sources
       in: query
@@ -2419,7 +2558,7 @@ components:
       name: pos
       in: query
       description: "if additional results shall be downloaded, set this to the value\
-        \ of the newPos attribute of the previous response"
+        \ of the nextPos attribute of the previous response"
       required: false
       style: form
       explode: true

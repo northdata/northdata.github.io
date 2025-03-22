@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.196.71
+  version: 1.232.10
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -56,6 +56,10 @@ paths:
         - $ref: '#/parameters/companyId'
         - $ref: '#/parameters/fuzzyMatch'
         - $ref: '#/parameters/registerKey'
+        - $ref: '#/parameters/minTimestamp'
+        - $ref: '#/parameters/maxTimestamp'
+        - $ref: '#/parameters/minPublicationDate'
+        - $ref: '#/parameters/maxPublicationDate'
         - $ref: '#/parameters/sources'
         - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
@@ -96,6 +100,10 @@ paths:
         - $ref: '#/parameters/personAddress'
         - $ref: '#/parameters/birthDate'
         - $ref: '#/parameters/personId'
+        - $ref: '#/parameters/minTimestamp'
+        - $ref: '#/parameters/maxTimestamp'
+        - $ref: '#/parameters/minPublicationDate'
+        - $ref: '#/parameters/maxPublicationDate'
         - $ref: '#/parameters/sources'
         - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
@@ -118,30 +126,22 @@ paths:
           in: query
           required: false
           type: string
-        - name: minTimestamp
-          description: minimum datetime publication was added to the database
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: maxTimestamp
-          description: maximum datetime publication was added to the database
-          in: query
-          required: false
-          type: string
-          format: date-time
         - name: minDate
-          description: DEPRECATED - please use minTimestamp instead
+          description: DEPRECATED - please use minTimestamp or minPublicationDate instead
           in: query
           required: false
           type: string
           format: date
         - name: maxDate
-          description: DEPRECATED - please use maxTimestamp instead
+          description: DEPRECATED - please use maxTimestamp or maxPublicationDate instead
           in: query
           required: false
           type: string
           format: date
+        - $ref: '#/parameters/minTimestamp'
+        - $ref: '#/parameters/maxTimestamp'
+        - $ref: '#/parameters/minPublicationDate'
+        - $ref: '#/parameters/maxPublicationDate'
         - $ref: '#/parameters/sources'
         - $ref: '#/parameters/source'
         - $ref: '#/parameters/content'
@@ -176,7 +176,11 @@ paths:
           in: query
           required: false
           type: boolean
-        - $ref: '#/parameters/pos'
+        - name: pos
+          description: if additional results shall be downloaded, set this to the value of the newPos attribute of the previous response
+          in: query
+          type: string
+          required: false
         - $ref: '#/parameters/censor'
         - $ref: '#/parameters/output'
       responses:
@@ -239,6 +243,7 @@ paths:
           type: boolean
           description: true to include former company names
         - $ref: '#/parameters/censor'
+        - $ref: '#/parameters/offset'
         - $ref: '#/parameters/limit'
         - $ref: '#/parameters/output'
         - $ref: '#/parameters/countries'
@@ -463,6 +468,34 @@ parameters:
     in: query
     required: false
     type: string
+  minPublicationDate:
+    name: minPublicationDate
+    description: minimum date publication was published on (by the source)
+    in: query
+    required: false
+    type: string
+    format: date
+  maxPublicationDate:
+    name: maxPublicationDate
+    description: maximum date publication was published on (by the source)
+    in: query
+    required: false
+    type: string
+    format: date
+  minTimestamp:
+    name: minTimestamp
+    description: minimum datetime publication was added to the database
+    in: query
+    required: false
+    type: string
+    format: date-time
+  maxTimestamp:
+    name: maxTimestamp
+    description: maximum datetime publication was added to the database
+    in: query
+    required: false
+    type: string
+    format: date-time
   sources:
     name: sources
     description: DEPRECATED (will be removed at some point of time)
@@ -511,7 +544,7 @@ parameters:
   pos:
     name: pos
     type: string
-    description: if additional results shall be downloaded, set this to the value of the newPos attribute of the previous response
+    description: if additional results shall be downloaded, set this to the value of the nextPos attribute of the previous response
     in: query
     required: false
   output:
