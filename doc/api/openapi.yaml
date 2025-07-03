@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.232.10
+  version: 1.232.11
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -165,10 +165,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Company'
+                $ref: "#/components/schemas/Company"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Company'
+                $ref: "#/components/schemas/Company"
   /company/v1/publications:
     get:
       description: Retrieve the publications associated with a company.
@@ -346,10 +346,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
             application/xml:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
   /person/v1/person:
     get:
       description: Retrieve a person.
@@ -438,10 +438,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: "#/components/schemas/Person"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Person'
+                $ref: "#/components/schemas/Person"
   /person/v1/publications:
     get:
       description: Retrieve the publications associated with a person.
@@ -602,10 +602,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
             application/xml:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
   /pub/v1/publications:
     get:
       description: "Retrieve publications. At most 10 publications are returned with\
@@ -791,10 +791,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
             application/xml:
               schema:
-                $ref: '#/components/schemas/GenericResponse'
+                $ref: "#/components/schemas/GenericResponse"
   /search/v1/universal:
     get:
       description: "universal search: provides best company and person matches for\
@@ -961,10 +961,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
             application/xml:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
   /search/v1/suggest:
     get:
       description: "auto complete: provides quick company and person suggestions for\
@@ -1056,10 +1056,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
             application/xml:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
   /search/v1/power:
     get:
       description: "power search: supports geo and financial criteria"
@@ -1334,10 +1334,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
             application/xml:
               schema:
-                $ref: '#/components/schemas/SearchResults'
+                $ref: "#/components/schemas/SearchResults"
   /billing/v1/requests:
     get:
       description: number of unique requests
@@ -1381,10 +1381,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Billing'
+                $ref: "#/components/schemas/Billing"
             application/xml:
               schema:
-                $ref: '#/components/schemas/Billing'
+                $ref: "#/components/schemas/Billing"
 components:
   schemas:
     Company:
@@ -1400,15 +1400,15 @@ components:
           description: "internal company id (do not store this id in an external database,\
             \ it may change over time)"
         name:
-          $ref: '#/components/schemas/CompanyName'
+          $ref: "#/components/schemas/CompanyName"
         rawName:
           type: string
           description: May provide the raw name found in register sources before applying
             normalizations and spelling fixes
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         register:
-          $ref: '#/components/schemas/Register'
+          $ref: "#/components/schemas/Register"
         lei:
           type: string
           description: International Legal Entity Identifier (LEI)
@@ -1456,34 +1456,34 @@ components:
           - liquidation
           - terminated
         history:
-          $ref: '#/components/schemas/CompanyHistory'
+          $ref: "#/components/schemas/CompanyHistory"
         capital:
-          $ref: '#/components/schemas/Financials'
+          $ref: "#/components/schemas/Financials"
         financials:
-          $ref: '#/components/schemas/Financials'
+          $ref: "#/components/schemas/Financials"
         mktgTechIndicators:
-          $ref: '#/components/schemas/Financials'
+          $ref: "#/components/schemas/Financials"
         events:
-          $ref: '#/components/schemas/Events'
+          $ref: "#/components/schemas/Events"
         extras:
           type: array
           description: extra data provided by 3rd parties
           items:
-            $ref: '#/components/schemas/Extras'
+            $ref: "#/components/schemas/Extras"
         sheets:
           type: array
           description: company's financial sheets (such as balance and earnings sheets)
           items:
-            $ref: '#/components/schemas/Sheet'
+            $ref: "#/components/schemas/Sheet"
         relatedCompanies:
-          $ref: '#/components/schemas/Relations'
+          $ref: "#/components/schemas/Relations"
         relatedPersons:
-          $ref: '#/components/schemas/Relations'
+          $ref: "#/components/schemas/Relations"
         filings:
           type: array
           description: external source-specific IDs
           items:
-            $ref: '#/components/schemas/Filing'
+            $ref: "#/components/schemas/Filing"
         blocked:
           type: boolean
           description: company data should not be publicly on the Internet because
@@ -1539,7 +1539,7 @@ components:
           type: string
           description: complete string
         source:
-          $ref: '#/components/schemas/PublicationSource'
+          $ref: "#/components/schemas/PublicationSource"
         city:
           type: string
           description: city (only for German insolvency filings)
@@ -1589,7 +1589,7 @@ components:
       type: object
       properties:
         name:
-          $ref: '#/components/schemas/CompanyName'
+          $ref: "#/components/schemas/CompanyName"
         date:
           type: string
           description: since when the referred company name is (known to be) in use
@@ -1600,7 +1600,7 @@ components:
       type: object
       properties:
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         date:
           type: string
           description: since when the referred address is (known to be) in use
@@ -1611,7 +1611,7 @@ components:
       type: object
       properties:
         register:
-          $ref: '#/components/schemas/Register'
+          $ref: "#/components/schemas/Register"
         date:
           type: string
           description: since when this registry entry is valid
@@ -1623,27 +1623,27 @@ components:
           type: array
           description: name history of a company
           items:
-            $ref: '#/components/schemas/CompanyNameHistoryItem'
+            $ref: "#/components/schemas/CompanyNameHistoryItem"
         addresses:
           type: array
           description: adress history of a company
           items:
-            $ref: '#/components/schemas/AddressHistoryItem'
+            $ref: "#/components/schemas/AddressHistoryItem"
         registers:
           type: array
           description: register entry history of a company
           items:
-            $ref: '#/components/schemas/RegisterHistoryItem'
+            $ref: "#/components/schemas/RegisterHistoryItem"
         financials:
           type: array
           description: historical financial data
           items:
-            $ref: '#/components/schemas/Financials'
+            $ref: "#/components/schemas/Financials"
         mktgTechIndicators:
           type: array
           description: historical financial data
           items:
-            $ref: '#/components/schemas/Financials'
+            $ref: "#/components/schemas/Financials"
     Events:
       required:
       - items
@@ -1653,7 +1653,7 @@ components:
           type: array
           description: the list of events
           items:
-            $ref: '#/components/schemas/Event'
+            $ref: "#/components/schemas/Event"
       description: list of events
     Event:
       type: object
@@ -1689,15 +1689,15 @@ components:
           description: true if the financial data refer to a consolidated balance
             (Konzernabschluss)
         source:
-          $ref: '#/components/schemas/FinancialsSource'
+          $ref: "#/components/schemas/FinancialsSource"
         items:
           type: array
           description: "list of financial numbers (maybe empty. If empty, see note\
             \ for the reason)"
           items:
-            $ref: '#/components/schemas/Financial'
+            $ref: "#/components/schemas/Financial"
         note:
-          $ref: '#/components/schemas/FinancialsNote'
+          $ref: "#/components/schemas/FinancialsNote"
       description: financial data
     Financial:
       required:
@@ -1759,7 +1759,7 @@ components:
           description: excerpts from the original publication containing the financial
             data
           items:
-            $ref: '#/components/schemas/SourceSnippet'
+            $ref: "#/components/schemas/SourceSnippet"
       description: source of financial data
     FinancialsNote:
       required:
@@ -1803,7 +1803,7 @@ components:
           type: array
           description: extra data items in this set
           items:
-            $ref: '#/components/schemas/Extra'
+            $ref: "#/components/schemas/Extra"
       description: "set of additional data, typically provided by 3rd parties."
     Extra:
       required:
@@ -1852,7 +1852,7 @@ components:
             download)
           format: date-time
         source:
-          $ref: '#/components/schemas/PublicationSource'
+          $ref: "#/components/schemas/PublicationSource"
         sourceName:
           type: string
           description: full name of source
@@ -1880,23 +1880,23 @@ components:
           type: string
           description: text of publication in HTML format
         publisher:
-          $ref: '#/components/schemas/Company'
+          $ref: "#/components/schemas/Company"
         structure:
-          $ref: '#/components/schemas/PublicationStructure'
+          $ref: "#/components/schemas/PublicationStructure"
         mentionedCompanies:
-          $ref: '#/components/schemas/Relations'
+          $ref: "#/components/schemas/Relations"
         mentionedPersons:
-          $ref: '#/components/schemas/Relations'
+          $ref: "#/components/schemas/Relations"
         filings:
           type: array
           description: external filing IDs (e.g. insolvency filing IDs)
           items:
-            $ref: '#/components/schemas/Filing'
+            $ref: "#/components/schemas/Filing"
         attachments:
           type: array
           description: additional binary content such as images or PDF
           items:
-            $ref: '#/components/schemas/Attachment'
+            $ref: "#/components/schemas/Attachment"
         blocked:
           type: boolean
           description: publication data should not be publicly on the Internet because
@@ -1929,7 +1929,7 @@ components:
           type: array
           description: topics of the publication
           items:
-            $ref: '#/components/schemas/Topic'
+            $ref: "#/components/schemas/Topic"
       description: result of the structural analysis of a publication
     PublicationSource:
       type: string
@@ -1945,9 +1945,9 @@ components:
       type: object
       properties:
         company:
-          $ref: '#/components/schemas/Company'
+          $ref: "#/components/schemas/Company"
         person:
-          $ref: '#/components/schemas/Person'
+          $ref: "#/components/schemas/Person"
         description:
           type: string
           description: human readable short summary
@@ -1955,7 +1955,7 @@ components:
           type: array
           description: description of the type of the relation
           items:
-            $ref: '#/components/schemas/Role'
+            $ref: "#/components/schemas/Role"
       description: relation of a company or person to another company or person
     Relations:
       required:
@@ -1965,7 +1965,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/Relation'
+            $ref: "#/components/schemas/Relation"
       description: list of related companies / persons
     Role:
       required:
@@ -2020,7 +2020,7 @@ components:
           description: shares in percent
           format: double
         sharesNominal:
-          $ref: '#/components/schemas/Role_sharesNominal'
+          $ref: "#/components/schemas/Role_sharesNominal"
       description: description of the type of a relation
     PersonName:
       required:
@@ -2047,9 +2047,9 @@ components:
           description: "internal person id (do not store this id in an external database,\
             \ it may change over time)"
         name:
-          $ref: '#/components/schemas/PersonName'
+          $ref: "#/components/schemas/PersonName"
         address:
-          $ref: '#/components/schemas/Address'
+          $ref: "#/components/schemas/Address"
         birthDate:
           type: string
           description: Birth date
@@ -2071,12 +2071,12 @@ components:
           type: string
           description: North data web page for this person
         relatedCompanies:
-          $ref: '#/components/schemas/Relations'
+          $ref: "#/components/schemas/Relations"
         filings:
           type: array
           description: external source-specific IDs
           items:
-            $ref: '#/components/schemas/Filing'
+            $ref: "#/components/schemas/Filing"
         blocked:
           type: boolean
           description: person data should not be publicly on the Internet because
@@ -2093,7 +2093,7 @@ components:
         publications:
           type: array
           items:
-            $ref: '#/components/schemas/Publication'
+            $ref: "#/components/schemas/Publication"
     SearchResults:
       type: object
       properties:
@@ -2101,7 +2101,7 @@ components:
           type: array
           description: list of results
           items:
-            $ref: '#/components/schemas/SearchResult'
+            $ref: "#/components/schemas/SearchResult"
         censored:
           type: boolean
           description: true if results have been omitted because of censoring
@@ -2126,11 +2126,11 @@ components:
       type: object
       properties:
         company:
-          $ref: '#/components/schemas/Company'
+          $ref: "#/components/schemas/Company"
         person:
-          $ref: '#/components/schemas/Person'
+          $ref: "#/components/schemas/Person"
         publication:
-          $ref: '#/components/schemas/Publication'
+          $ref: "#/components/schemas/Publication"
         matchedName:
           type: string
           description: the matched name (useful if a company has been renamed)
@@ -2171,7 +2171,7 @@ components:
           description: publishing date
           format: date
         price:
-          $ref: '#/components/schemas/Money'
+          $ref: "#/components/schemas/Money"
       description: a publication that can be bought and downloaded
     Order:
       type: object
@@ -2182,7 +2182,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/OrderItem'
+            $ref: "#/components/schemas/OrderItem"
       description: result of an order
     OrderItem:
       required:
@@ -2190,7 +2190,7 @@ components:
       type: object
       properties:
         product:
-          $ref: '#/components/schemas/Product'
+          $ref: "#/components/schemas/Product"
         status:
           type: string
           description: whether the publication is ready for download
@@ -2217,12 +2217,12 @@ components:
           type: array
           description: list of column headers
           items:
-            $ref: '#/components/schemas/SheetColumnHeader'
+            $ref: "#/components/schemas/SheetColumnHeader"
         rows:
           type: array
           description: list of rows
           items:
-            $ref: '#/components/schemas/SheetRow'
+            $ref: "#/components/schemas/SheetRow"
         type:
           type: string
           description: the kind of financial data reported in this sheet
@@ -2256,7 +2256,7 @@ components:
           description: the date of entries in this column
           format: date
         source:
-          $ref: '#/components/schemas/FinancialsSource'
+          $ref: "#/components/schemas/FinancialsSource"
       description: column header of a sheet
     SheetRow:
       required:
@@ -2276,7 +2276,7 @@ components:
           type: array
           description: list of cells
           items:
-            $ref: '#/components/schemas/SheetCell'
+            $ref: "#/components/schemas/SheetCell"
       description: row of a sheet
     SheetCell:
       type: object
