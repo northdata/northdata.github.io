@@ -183,7 +183,7 @@ font-style: italic;
     <div class="app-desc">Programmatic access to the North Data DB.</div>
     <div class="app-desc">More information: <a href="https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md">https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md</a></div>
     <div class="app-desc">Contact Info: <a href="support@northdata.de">support@northdata.de</a></div>
-    <div class="app-desc">Version: 1.232.11</div>
+    <div class="app-desc">Version: 1.233.0</div>
     <div class="app-desc">BasePath:/_api</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -202,6 +202,8 @@ font-style: italic;
   <li><a href="#personV1PersonGet"><code><span class="http-method">get</span> /person/v1/person</code></a></li>
   <li><a href="#personV1PublicationsGet"><code><span class="http-method">get</span> /person/v1/publications</code></a></li>
   <li><a href="#pubV1PublicationsGet"><code><span class="http-method">get</span> /pub/v1/publications</code></a></li>
+  <li><a href="#referenceV1OverviewGet"><code><span class="http-method">get</span> /reference/v1/overview</code></a></li>
+  <li><a href="#referenceV1SegmentCodesGet"><code><span class="http-method">get</span> /reference/v1/segmentCodes</code></a></li>
   <li><a href="#searchV1PowerGet"><code><span class="http-method">get</span> /search/v1/power</code></a></li>
   <li><a href="#searchV1SuggestGet"><code><span class="http-method">get</span> /search/v1/suggest</code></a></li>
   <li><a href="#searchV1UniversalGet"><code><span class="http-method">get</span> /search/v1/universal</code></a></li>
@@ -290,13 +292,20 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include financial data </div><div class="param">events (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventTypes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which event types wille be returned if events equals true </div><div class="param">maxEvents (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which event types will be returned if events equals true </div><div class="param">maxEvents (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum number of events to return format: int32</div><div class="param">relations (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data </div><div class="param">alwaysResolve (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data.
+Note: For owners, only majority shareholders are included. For more owners, use the &quot;owners&quot; parameter instead. </div><div class="param">owners (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include all owners/shareholders (companies &amp; persons) of the subject company </div><div class="param">ownerships (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include companies owned by the subject company. </div><div class="param">representatives (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include legal representatives of the subject company (e.g., managing directors, board members). </div><div class="param">alwaysResolve (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to lookup current state of related company from database </div><div class="param">sheets (optional)</div>
 
@@ -442,7 +451,8 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include historical data </div><div class="param">relations (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data </div><div class="param">alwaysResolve (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data.
+Note: For owners, only majority shareholders are included. For more owners, use the &quot;owners&quot; parameter instead. </div><div class="param">alwaysResolve (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to lookup current state of related company from database </div><div class="param">output (optional)</div>
 
@@ -636,6 +646,93 @@ font-style: italic;
         <a href="#GenericResponse">GenericResponse</a>
   </div> <!-- method -->
   <hr/>
+  <div class="method"><a name="referenceV1OverviewGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /reference/v1/overview</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">referenceV1OverviewGet</span>)</div>
+    <div class="method-notes">Returns meta information about the API, such as supported parameter values for power search.</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      <a href="#OverviewResponse">OverviewResponse</a>
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{"empty": false}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/xml</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A successful response
+        <a href="#OverviewResponse">OverviewResponse</a>
+  </div> <!-- method -->
+  <hr/>
+  <div class="method"><a name="referenceV1SegmentCodesGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /reference/v1/segmentCodes</code></pre></div>
+    <div class="method-summary"> (<span class="nickname">referenceV1SegmentCodesGet</span>)</div>
+    <div class="method-notes">Returns the list of segment codes for the requested standard. The <code>standard</code> parameter must be one of the segment code standards available in the <code>/reference/v1/overview</code> endpoint (<code>segmentCodeStandards</code>).</div>
+
+
+
+
+
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">standard (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Segment code standard name, as returned in the <code>segmentCodeStandards</code> property of <code>/reference/v1/overview</code>. </div>
+    </div>  <!-- field-items -->
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      array[String]
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>{}</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="header">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+      <li><code>application/xml</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    List of available segment codes for the requested standard.
+        
+    <h4 class="field-label">400</h4>
+    Invalid or unsupported segment code standard
+        <a href="#"></a>
+  </div> <!-- method -->
+  <hr/>
   <div class="method"><a name="searchV1PowerGet"/>
     <div class="method-path">
     <a class="up" href="#__Methods">Up</a>
@@ -657,13 +754,13 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum distance from given address format: double</div><div class="param">legalForm (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of legal forms </div><div class="param">segmentCodeStandard (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of legal forms and legal form families. Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint (see <code>legalForms</code> and <code>legalFormFamilies</code>). </div><div class="param">segmentCodeStandard (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; name of the segment code standard to use </div><div class="param">segmentCodes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; name of the segment code standard to use. Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">segmentCodes (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of segment codes </div><div class="param">indicatorId (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of segment codes Valid values can be retrieved dynamically from the <code>/reference/v1/segmentCodes</code> endpoint. </div><div class="param">indicatorId (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of indicator ids for performance filtering (see user guide) </div><div class="param">lowerBound (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of indicator ids for performance filtering. Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">lowerBound (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of lower bounds for performance filterings  (see user guide) format: double</div><div class="param">upperBound (optional)</div>
 
@@ -671,29 +768,34 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of lower bound units. Only required for currencies different from EUR </div><div class="param">upperBoundUnit (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of upper bound units. Only required for currencies different from EUR </div><div class="param">eventType (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of upper bound units. Only required for currencies different from EUR </div><div class="param">events (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of event types for event filtering (see user guide) </div><div class="param">minDate (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventType (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of event types for event filtering. Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">minDate (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of minimum dates for event filterings  (see user guide) format: date</div><div class="param">maxDate (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of maximum dates for event filterings  (see user guide) format: date</div><div class="param">countries (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">status (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">history (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">history (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include historical data </div><div class="param">financials (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include financial data </div><div class="param">events (optional)</div>
-
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventTypes (optional)</div>
-
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which event types wille be returned if events equals true </div><div class="param">maxEvents (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include financial data </div><div class="param">maxEvents (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum number of events to return format: int32</div><div class="param">relations (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data </div><div class="param">alwaysResolve (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data.
+Note: For owners, only majority shareholders are included. For more owners, use the &quot;owners&quot; parameter instead. </div><div class="param">owners (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include all owners/shareholders (companies &amp; persons) of the subject company </div><div class="param">ownerships (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include companies owned by the subject company. </div><div class="param">representatives (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include legal representatives of the subject company (e.g., managing directors, board members). </div><div class="param">alwaysResolve (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to lookup current state of related company from database </div><div class="param">sheets (optional)</div>
 
@@ -766,9 +868,9 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div><div class="param">countries (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">status (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div>
     </div>  <!-- field-items -->
 
 
@@ -827,21 +929,28 @@ font-style: italic;
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div><div class="param">countries (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries) </div><div class="param">status (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of country ISO codes to restrict result set (empty to retrieve all countries). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">status (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation) </div><div class="param">history (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; list of valid statuses (active, terminated, liquidation). Valid values can be retrieved dynamically from the <code>/reference/v1/overview</code> endpoint. </div><div class="param">history (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include historical data </div><div class="param">financials (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include financial data </div><div class="param">events (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventTypes (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include event data </div><div class="param">eventType (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which event types wille be returned if events equals true </div><div class="param">maxEvents (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; restrict which event types will be returned if events equals true </div><div class="param">maxEvents (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; maximum number of events to return format: int32</div><div class="param">relations (optional)</div>
 
-      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data </div><div class="param">alwaysResolve (optional)</div>
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include related company and person data.
+Note: For owners, only majority shareholders are included. For more owners, use the &quot;owners&quot; parameter instead. </div><div class="param">owners (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include all owners/shareholders (companies &amp; persons) of the subject company </div><div class="param">ownerships (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include companies owned by the subject company. </div><div class="param">representatives (optional)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include legal representatives of the subject company (e.g., managing directors, board members). </div><div class="param">alwaysResolve (optional)</div>
 
       <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to lookup current state of related company from database </div><div class="param">sheets (optional)</div>
 
@@ -885,6 +994,7 @@ font-style: italic;
   <ol>
     <li><a href="#Address"><code>Address</code> - </a></li>
     <li><a href="#AddressHistoryItem"><code>AddressHistoryItem</code> - </a></li>
+    <li><a href="#ApplicableCountries"><code>ApplicableCountries</code> - </a></li>
     <li><a href="#Attachment"><code>Attachment</code> - </a></li>
     <li><a href="#Billing"><code>Billing</code> - </a></li>
     <li><a href="#Company"><code>Company</code> - Company</a></li>
@@ -893,6 +1003,7 @@ font-style: italic;
     <li><a href="#CompanyNameHistoryItem"><code>CompanyNameHistoryItem</code> - </a></li>
     <li><a href="#Event"><code>Event</code> - </a></li>
     <li><a href="#EventType"><code>EventType</code> - </a></li>
+    <li><a href="#EventTypeOverview"><code>EventTypeOverview</code> - </a></li>
     <li><a href="#Events"><code>Events</code> - </a></li>
     <li><a href="#Extra"><code>Extra</code> - </a></li>
     <li><a href="#Extras"><code>Extras</code> - </a></li>
@@ -902,9 +1013,13 @@ font-style: italic;
     <li><a href="#FinancialsNote"><code>FinancialsNote</code> - </a></li>
     <li><a href="#FinancialsSource"><code>FinancialsSource</code> - </a></li>
     <li><a href="#GenericResponse"><code>GenericResponse</code> - </a></li>
+    <li><a href="#LegalFormOverview"><code>LegalFormOverview</code> - </a></li>
     <li><a href="#Money"><code>Money</code> - </a></li>
     <li><a href="#Order"><code>Order</code> - </a></li>
     <li><a href="#OrderItem"><code>OrderItem</code> - </a></li>
+    <li><a href="#OverviewResponse"><code>OverviewResponse</code> - </a></li>
+    <li><a href="#OverviewResponse_countries"><code>OverviewResponse_countries</code> - </a></li>
+    <li><a href="#PerformanceIndicatorOverview"><code>PerformanceIndicatorOverview</code> - </a></li>
     <li><a href="#Person"><code>Person</code> - </a></li>
     <li><a href="#PersonName"><code>PersonName</code> - </a></li>
     <li><a href="#Product"><code>Product</code> - </a></li>
@@ -913,6 +1028,7 @@ font-style: italic;
     <li><a href="#PublicationStructure"><code>PublicationStructure</code> - </a></li>
     <li><a href="#Register"><code>Register</code> - </a></li>
     <li><a href="#RegisterHistoryItem"><code>RegisterHistoryItem</code> - </a></li>
+    <li><a href="#RegisterOverview"><code>RegisterOverview</code> - </a></li>
     <li><a href="#Relation"><code>Relation</code> - </a></li>
     <li><a href="#Relations"><code>Relations</code> - </a></li>
     <li><a href="#Role"><code>Role</code> - </a></li>
@@ -949,6 +1065,12 @@ font-style: italic;
       <div class="param">address </div><div class="param-desc"><span class="param-type"><a href="#Address">Address</a></span>  </div>
 <div class="param">date (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> since when the referred address is (known to be) in use format: date</div>
     </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="ApplicableCountries"><code>ApplicableCountries</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>List of applicable countries (two-letter ISO codes).</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
   </div>
   <div class="model">
     <h3><a name="Attachment"><code>Attachment</code> - </a> <a class="up" href="#__Models">Up</a></h3>
@@ -1047,6 +1169,14 @@ font-style: italic;
           </div>  <!-- field-items -->
   </div>
   <div class="model">
+    <h3><a name="EventTypeOverview"><code>EventTypeOverview</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>An event type and the countries where it is available.</div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Event type identifier (matches values accepted by <code>EventType</code> input) </div>
+<div class="param">countries (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of two-letter ISO country codes where this event type is supported </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
     <h3><a name="Events"><code>Events</code> - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'>list of events</div>
     <div class="field-items">
@@ -1136,6 +1266,14 @@ font-style: italic;
     </div>  <!-- field-items -->
   </div>
   <div class="model">
+    <h3><a name="LegalFormOverview"><code>LegalFormOverview</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A legal form and the countries where it is available.</div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">countries (optional)</div><div class="param-desc"><span class="param-type"><a href="#ApplicableCountries">ApplicableCountries</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
     <h3><a name="Money"><code>Money</code> - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'>amount and currency</div>
     <div class="field-items">
@@ -1162,6 +1300,37 @@ font-style: italic;
         <div class="param-enum">waiting</div><div class="param-enum">ready</div><div class="param-enum">unavailable</div>
 <div class="param">url (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> url to download from (when the status is 'ready') </div>
 <div class="param">contentType (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> mime type </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OverviewResponse"><code>OverviewResponse</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">countries (optional)</div><div class="param-desc"><span class="param-type"><a href="#OverviewResponse_countries">OverviewResponse_countries</a></span>  </div>
+<div class="param">eventTypes (optional)</div><div class="param-desc"><span class="param-type"><a href="#EventTypeOverview">array[EventTypeOverview]</a></span> List of available events for power search. </div>
+<div class="param">legalFormFamilies (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of available legal form families for power search. </div>
+<div class="param">legalForms (optional)</div><div class="param-desc"><span class="param-type"><a href="#LegalFormOverview">array[LegalFormOverview]</a></span> List of available legal forms for power search. </div>
+<div class="param">legalStatuses (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of possible states in the lifecycle of a company. </div>
+<div class="param">performanceIndicators (optional)</div><div class="param-desc"><span class="param-type"><a href="#PerformanceIndicatorOverview">array[PerformanceIndicatorOverview]</a></span> List of available performance indicators for power search. </div>
+<div class="param">registers (optional)</div><div class="param-desc"><span class="param-type"><a href="#RegisterOverview">array[RegisterOverview]</a></span>  </div>
+<div class="param">roleTypes (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of available role types. </div>
+<div class="param">segmentCodeStandards (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span> List of supported segment code standards available for power search. </div>
+<div class="param">sources (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+<div class="param">topicTypes (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">array[String]</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="OverviewResponse_countries"><code>OverviewResponse_countries</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>List of supported countries.</div>
+    <div class="field-items">
+          </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="PerformanceIndicatorOverview"><code>PerformanceIndicatorOverview</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A performance indicator and the countries where it is available.</div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span>  </div>
+<div class="param">countries (optional)</div><div class="param-desc"><span class="param-type"><a href="#ApplicableCountries">ApplicableCountries</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -1257,6 +1426,15 @@ font-style: italic;
     <div class="field-items">
       <div class="param">register </div><div class="param-desc"><span class="param-type"><a href="#Register">Register</a></span>  </div>
 <div class="param">date (optional)</div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> since when this registry entry is valid format: date</div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="RegisterOverview"><code>RegisterOverview</code> - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>A country's register and an example entry.</div>
+    <div class="field-items">
+      <div class="param">country (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Register country (two-letter ISO code) </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Name of the register authority (localised depending on the language settings when possible) </div>
+<div class="param">sample (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> A representative example of how a register ID would look like </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">

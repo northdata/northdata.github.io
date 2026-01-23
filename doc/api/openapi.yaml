@@ -6,7 +6,7 @@ info:
   contact:
     name: North Data Support
     email: support@northdata.de
-  version: 1.232.11
+  version: 1.233.0
 servers:
 - url: https://www.northdata.de/_api
 paths:
@@ -97,9 +97,9 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: eventTypes
+      - name: eventType
         in: query
-        description: restrict which event types wille be returned if events equals
+        description: restrict which event types will be returned if events equals
           true
         required: false
         style: pipeDelimited
@@ -117,7 +117,35 @@ paths:
           format: int32
       - name: relations
         in: query
-        description: true to include related company and person data
+        description: |
+          true to include related company and person data.
+          Note: For owners, only majority shareholders are included. For more owners, use the "owners" parameter instead.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: owners
+        in: query
+        description: true to include all owners/shareholders (companies & persons)
+          of the subject company
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: ownerships
+        in: query
+        description: true to include companies owned by the subject company.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: representatives
+        in: query
+        description: "true to include legal representatives of the subject company\
+          \ (e.g., managing directors, board members)."
         required: false
         style: form
         explode: true
@@ -406,7 +434,9 @@ paths:
           type: boolean
       - name: relations
         in: query
-        description: true to include related company and person data
+        description: |
+          true to include related company and person data.
+          Note: For owners, only majority shareholders are included. For more owners, use the "owners" parameter instead.
         required: false
         style: form
         explode: true
@@ -867,7 +897,8 @@ paths:
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
-          all countries)
+          all countries). Valid values can be retrieved dynamically from the `/reference/v1/overview`
+          endpoint.
         required: false
         style: form
         explode: true
@@ -875,7 +906,9 @@ paths:
           type: string
       - name: status
         in: query
-        description: "list of valid statuses (active, terminated, liquidation)"
+        description: "list of valid statuses (active, terminated, liquidation). Valid\
+          \ values can be retrieved dynamically from the `/reference/v1/overview`\
+          \ endpoint."
         required: false
         style: form
         explode: true
@@ -905,9 +938,9 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: eventTypes
+      - name: eventType
         in: query
-        description: restrict which event types wille be returned if events equals
+        description: restrict which event types will be returned if events equals
           true
         required: false
         style: pipeDelimited
@@ -925,7 +958,35 @@ paths:
           format: int32
       - name: relations
         in: query
-        description: true to include related company and person data
+        description: |
+          true to include related company and person data.
+          Note: For owners, only majority shareholders are included. For more owners, use the "owners" parameter instead.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: owners
+        in: query
+        description: true to include all owners/shareholders (companies & persons)
+          of the subject company
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: ownerships
+        in: query
+        description: true to include companies owned by the subject company.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: representatives
+        in: query
+        description: "true to include legal representatives of the subject company\
+          \ (e.g., managing directors, board members)."
         required: false
         style: form
         explode: true
@@ -1036,7 +1097,8 @@ paths:
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
-          all countries)
+          all countries). Valid values can be retrieved dynamically from the `/reference/v1/overview`
+          endpoint.
         required: false
         style: form
         explode: true
@@ -1044,7 +1106,9 @@ paths:
           type: string
       - name: status
         in: query
-        description: "list of valid statuses (active, terminated, liquidation)"
+        description: "list of valid statuses (active, terminated, liquidation). Valid\
+          \ values can be retrieved dynamically from the `/reference/v1/overview`\
+          \ endpoint."
         required: false
         style: form
         explode: true
@@ -1091,7 +1155,9 @@ paths:
           format: double
       - name: legalForm
         in: query
-        description: list of legal forms
+        description: list of legal forms and legal form families. Valid values can
+          be retrieved dynamically from the `/reference/v1/overview` endpoint (see
+          `legalForms` and `legalFormFamilies`).
         required: false
         style: form
         explode: true
@@ -1099,7 +1165,8 @@ paths:
           type: string
       - name: segmentCodeStandard
         in: query
-        description: name of the segment code standard to use
+        description: name of the segment code standard to use. Valid values can be
+          retrieved dynamically from the `/reference/v1/overview` endpoint.
         required: false
         style: form
         explode: true
@@ -1107,7 +1174,8 @@ paths:
           type: string
       - name: segmentCodes
         in: query
-        description: list of segment codes
+        description: list of segment codes Valid values can be retrieved dynamically
+          from the `/reference/v1/segmentCodes` endpoint.
         required: false
         style: form
         explode: true
@@ -1115,7 +1183,8 @@ paths:
           type: string
       - name: indicatorId
         in: query
-        description: list of indicator ids for performance filtering (see user guide)
+        description: list of indicator ids for performance filtering. Valid values
+          can be retrieved dynamically from the `/reference/v1/overview` endpoint.
         required: false
         style: pipeDelimited
         explode: false
@@ -1167,9 +1236,18 @@ paths:
           type: array
           items:
             type: string
+      - name: events
+        in: query
+        description: true to include event data
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
       - name: eventType
         in: query
-        description: list of event types for event filtering (see user guide)
+        description: list of event types for event filtering. Valid values can be
+          retrieved dynamically from the `/reference/v1/overview` endpoint.
         required: false
         style: pipeDelimited
         explode: false
@@ -1202,7 +1280,8 @@ paths:
       - name: countries
         in: query
         description: list of country ISO codes to restrict result set (empty to retrieve
-          all countries)
+          all countries). Valid values can be retrieved dynamically from the `/reference/v1/overview`
+          endpoint.
         required: false
         style: form
         explode: true
@@ -1210,7 +1289,9 @@ paths:
           type: string
       - name: status
         in: query
-        description: "list of valid statuses (active, terminated, liquidation)"
+        description: "list of valid statuses (active, terminated, liquidation). Valid\
+          \ values can be retrieved dynamically from the `/reference/v1/overview`\
+          \ endpoint."
         required: false
         style: form
         explode: true
@@ -1232,23 +1313,6 @@ paths:
         explode: true
         schema:
           type: boolean
-      - name: events
-        in: query
-        description: true to include event data
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: boolean
-      - name: eventTypes
-        in: query
-        description: restrict which event types wille be returned if events equals
-          true
-        required: false
-        style: pipeDelimited
-        explode: false
-        schema:
-          type: array
       - name: maxEvents
         in: query
         description: maximum number of events to return
@@ -1260,7 +1324,35 @@ paths:
           format: int32
       - name: relations
         in: query
-        description: true to include related company and person data
+        description: |
+          true to include related company and person data.
+          Note: For owners, only majority shareholders are included. For more owners, use the "owners" parameter instead.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: owners
+        in: query
+        description: true to include all owners/shareholders (companies & persons)
+          of the subject company
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: ownerships
+        in: query
+        description: true to include companies owned by the subject company.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: representatives
+        in: query
+        description: "true to include legal representatives of the subject company\
+          \ (e.g., managing directors, board members)."
         required: false
         style: form
         explode: true
@@ -1338,6 +1430,56 @@ paths:
             application/xml:
               schema:
                 $ref: "#/components/schemas/SearchResults"
+  /reference/v1/overview:
+    get:
+      description: "Returns meta information about the API, such as supported parameter\
+        \ values for power search."
+      responses:
+        "200":
+          description: A successful response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/OverviewResponse"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/OverviewResponse"
+  /reference/v1/segmentCodes:
+    get:
+      description: Returns the list of segment codes for the requested standard. The
+        `standard` parameter must be one of the segment code standards available in
+        the `/reference/v1/overview` endpoint (`segmentCodeStandards`).
+      parameters:
+      - name: standard
+        in: query
+        description: "Segment code standard name, as returned in the `segmentCodeStandards`\
+          \ property of `/reference/v1/overview`."
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: List of available segment codes for the requested standard.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Segment code
+                  example: "62.01"
+            application/xml:
+              schema:
+                type: array
+                items:
+                  type: string
+                  description: Segment code
+                  example: "62.01"
+        "400":
+          description: Invalid or unsupported segment code standard
+          content: {}
   /billing/v1/requests:
     get:
       description: number of unique requests
@@ -2303,6 +2445,111 @@ components:
           type: string
           description: mime type
       description: binary content related to a publication
+    OverviewResponse:
+      type: object
+      properties:
+        countries:
+          type: object
+          description: List of supported countries.
+          allOf:
+          - $ref: "#/components/schemas/ApplicableCountries"
+        eventTypes:
+          type: array
+          description: List of available events for power search.
+          items:
+            $ref: "#/components/schemas/EventTypeOverview"
+        legalFormFamilies:
+          type: array
+          description: List of available legal form families for power search.
+          items:
+            type: string
+        legalForms:
+          type: array
+          description: List of available legal forms for power search.
+          items:
+            $ref: "#/components/schemas/LegalFormOverview"
+        legalStatuses:
+          type: array
+          description: List of possible states in the lifecycle of a company.
+          items:
+            type: string
+        performanceIndicators:
+          type: array
+          description: List of available performance indicators for power search.
+          items:
+            $ref: "#/components/schemas/PerformanceIndicatorOverview"
+        registers:
+          type: array
+          items:
+            $ref: "#/components/schemas/RegisterOverview"
+        roleTypes:
+          type: array
+          description: List of available role types.
+          items:
+            type: string
+        segmentCodeStandards:
+          type: array
+          description: List of supported segment code standards available for power
+            search.
+          items:
+            type: string
+        sources:
+          type: array
+          items:
+            type: string
+        topicTypes:
+          type: array
+          items:
+            type: string
+    EventTypeOverview:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Event type identifier (matches values accepted by `EventType`
+            input)
+        countries:
+          type: array
+          description: List of two-letter ISO country codes where this event type
+            is supported
+          items:
+            type: string
+      description: An event type and the countries where it is available.
+    LegalFormOverview:
+      type: object
+      properties:
+        id:
+          type: string
+        countries:
+          $ref: "#/components/schemas/ApplicableCountries"
+      description: A legal form and the countries where it is available.
+    PerformanceIndicatorOverview:
+      type: object
+      properties:
+        id:
+          type: string
+        countries:
+          $ref: "#/components/schemas/ApplicableCountries"
+      description: A performance indicator and the countries where it is available.
+    RegisterOverview:
+      type: object
+      properties:
+        country:
+          type: string
+          description: Register country (two-letter ISO code)
+        name:
+          type: string
+          description: Name of the register authority (localised depending on the
+            language settings when possible)
+        sample:
+          type: string
+          description: A representative example of how a register ID would look like
+      description: A country's register and an example entry.
+    ApplicableCountries:
+      type: array
+      description: List of applicable countries (two-letter ISO codes).
+      items:
+        type: string
     Billing:
       type: object
       properties:
@@ -2613,10 +2860,10 @@ components:
       explode: true
       schema:
         type: boolean
-    eventTypes:
-      name: eventTypes
+    eventType:
+      name: eventType
       in: query
-      description: restrict which event types wille be returned if events equals true
+      description: restrict which event types will be returned if events equals true
       required: false
       style: pipeDelimited
       explode: false
@@ -2635,7 +2882,38 @@ components:
     relations:
       name: relations
       in: query
-      description: true to include related company and person data
+      description: |
+        true to include related company and person data.
+        Note: For owners, only majority shareholders are included. For more owners, use the "owners" parameter instead.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+    owners:
+      name: owners
+      in: query
+      description: true to include all owners/shareholders (companies & persons) of
+        the subject company
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+    ownerships:
+      name: ownerships
+      in: query
+      description: true to include companies owned by the subject company.
+      required: false
+      style: form
+      explode: true
+      schema:
+        type: boolean
+    representatives:
+      name: representatives
+      in: query
+      description: "true to include legal representatives of the subject company (e.g.,\
+        \ managing directors, board members)."
       required: false
       style: form
       explode: true
@@ -2645,7 +2923,8 @@ components:
       name: countries
       in: query
       description: list of country ISO codes to restrict result set (empty to retrieve
-        all countries)
+        all countries). Valid values can be retrieved dynamically from the `/reference/v1/overview`
+        endpoint.
       required: false
       style: form
       explode: true
@@ -2654,7 +2933,8 @@ components:
     status:
       name: status
       in: query
-      description: "list of valid statuses (active, terminated, liquidation)"
+      description: "list of valid statuses (active, terminated, liquidation). Valid\
+        \ values can be retrieved dynamically from the `/reference/v1/overview` endpoint."
       required: false
       style: form
       explode: true
