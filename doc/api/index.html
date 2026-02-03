@@ -183,7 +183,7 @@ font-style: italic;
     <div class="app-desc">Programmatic access to the North Data DB.</div>
     <div class="app-desc">More information: <a href="https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md">https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md</a></div>
     <div class="app-desc">Contact Info: <a href="support@northdata.de">support@northdata.de</a></div>
-    <div class="app-desc">Version: 1.233.0</div>
+    <div class="app-desc">Version: 1.234.0</div>
     <div class="app-desc">BasePath:/_api</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -1463,11 +1463,11 @@ Note: For owners, only majority shareholders are included. For more owners, use 
 <div class="param">detail (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> depending on role and country </div>
 <div class="param">demotion (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation ends at the given date </div>
 <div class="param">announce (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if the relation might be preliminary </div>
-<div class="param">type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal identifier (for possible values, see Appendix F of the User's Guide) </div>
+<div class="param">type </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal identifier (for possible values, see Appendix F of the API User Guide) </div>
 <div class="param">group </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> internal group identifier </div>
         <div class="param-enum-header">Enum:</div>
         <div class="param-enum">Succession</div><div class="param-enum">Control</div><div class="param-enum">Merger</div><div class="param-enum">Personal</div><div class="param-enum">Other</div><div class="param-enum">Interest</div>
-<div class="param">dir (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Direction. The exact interpretation depends of the value of the field &quot;group&quot;. Case &quot;succession&quot; - older company is &quot;Source&quot;. Case &quot;merger&quot; - Sold company is &quot;Source&quot;, Buyer is target &quot;Target&quot;. Case &quot;control&quot; - controlling company is &quot;Source&quot;. </div>
+<div class="param">dir (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Direction. The exact interpretation depends of the value of the field &quot;group&quot;. See the API User Guide for details. </div>
         <div class="param-enum-header">Enum:</div>
         <div class="param-enum">None</div><div class="param-enum">Source</div><div class="param-enum">Target</div><div class="param-enum">Bi</div>
 <div class="param">sharesPercent (optional)</div><div class="param-desc"><span class="param-type"><a href="#double">Double</a></span> shares in percent format: double</div>
