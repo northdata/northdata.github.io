@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.234.2
+  version: 1.235.0
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -788,6 +788,9 @@ definitions:
       mktgTechIndicators:
         $ref: '#/definitions/Financials'
         description: Marketing and technology indicators (structure same as with financials)
+      oflagsIndicators:
+        $ref: '#/definitions/Financials'
+        description: Ownership and flags indicators (structure same as with financials)
       events:
         $ref: '#/definitions/Events'
         description: relevant events in the history of the company
