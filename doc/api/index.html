@@ -182,7 +182,7 @@
     <div class="app-desc">Programmatic access to the North Data DB.</div>
     <div class="app-desc">More information: <a href="https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md">https://github.com/northdata/api/blob/master/doc/data-api-userguide/data-api-userguide.md</a></div>
     <div class="app-desc">Contact Info: <a href="support@northdata.de">support@northdata.de</a></div>
-    <div class="app-desc">Version: 1.235.0</div>
+    <div class="app-desc">Version: 1.236.0</div>
     <div class="app-desc">BasePath:/_api</div>
     <div class="license-info">All rights reserved</div>
     <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
@@ -315,7 +315,9 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       
             <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include extra company data provided by 3rd parties </div>      <div class="param">output (optional)</div>
       
-            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div>    </div>  <!-- field-items -->
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; response format default: json </div>      <div class="param">flags (optional)</div>
+      
+            <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; true to include flags </div>    </div>  <!-- field-items -->
 
 
     <h3 class="field-label">Return type</h3>
@@ -331,6 +333,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     <pre class="example"><code>{
   "euId" : "euId",
   "subject" : "subject",
+  "flags" : [ {
+    "level" : "level",
+    "name" : "name",
+    "definition" : "definition",
+    "explanation" : "explanation"
+  }, {
+    "level" : "level",
+    "name" : "name",
+    "definition" : "definition",
+    "explanation" : "explanation"
+  } ],
   "extras" : [ {
     "sourceUrl" : "sourceUrl",
     "sourceName" : "sourceName",
@@ -932,6 +945,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -1458,6 +1482,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -2151,6 +2186,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -2677,6 +2723,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -3288,6 +3345,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -3814,6 +3882,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "publisher" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -4602,6 +4681,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -4965,6 +5055,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -5515,6 +5616,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -5878,6 +5990,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -6495,6 +6618,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -6858,6 +6992,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -7408,6 +7553,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -7771,6 +7927,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -8413,6 +8580,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -8776,6 +8954,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -9326,6 +9515,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
       "publisher" : {
         "euId" : "euId",
         "subject" : "subject",
+        "flags" : [ {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        }, {
+          "level" : "level",
+          "name" : "name",
+          "definition" : "definition",
+          "explanation" : "explanation"
+        } ],
         "extras" : [ {
           "sourceUrl" : "sourceUrl",
           "sourceName" : "sourceName",
@@ -9689,6 +9889,17 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     "company" : {
       "euId" : "euId",
       "subject" : "subject",
+      "flags" : [ {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      }, {
+        "level" : "level",
+        "name" : "name",
+        "definition" : "definition",
+        "explanation" : "explanation"
+      } ],
       "extras" : [ {
         "sourceUrl" : "sourceUrl",
         "sourceName" : "sourceName",
@@ -10087,6 +10298,7 @@ Note: For owners, only majority shareholders are included. For more owners, use 
     <li><a href="#Financials"><code>Financials</code></a></li>
     <li><a href="#FinancialsNote"><code>FinancialsNote</code></a></li>
     <li><a href="#FinancialsSource"><code>FinancialsSource</code></a></li>
+    <li><a href="#Flag"><code>Flag</code></a></li>
     <li><a href="#GenericResponse"><code>GenericResponse</code></a></li>
     <li><a href="#LegalFormOverview"><code>LegalFormOverview</code></a></li>
     <li><a href="#Money"><code>Money</code></a></li>
@@ -10197,6 +10409,7 @@ Note: For owners, only majority shareholders are included. For more owners, use 
 <div class="param">relatedCompanies (optional)</div><div class="param-desc"><span class="param-type"><a href="#Relations">Relations</a></span>  </div>
 <div class="param">relatedPersons (optional)</div><div class="param-desc"><span class="param-type"><a href="#Relations">Relations</a></span>  </div>
 <div class="param">filings (optional)</div><div class="param-desc"><span class="param-type"><a href="#Filing">array[Filing]</a></span> external source-specific IDs </div>
+<div class="param">flags (optional)</div><div class="param-desc"><span class="param-type"><a href="#Flag">array[Flag]</a></span> risk flags associated with the company </div>
 <div class="param">blocked (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> company data should not be publicly on the Internet because of a request for privacy protection </div>
 <div class="param">lastUpdateTime (optional)</div><div class="param-desc"><span class="param-type"><a href="#DateTime">Date</a></span> last time this company was updated format: date-time</div>
     </div>  <!-- field-items -->
@@ -10330,6 +10543,16 @@ Note: For owners, only majority shareholders are included. For more owners, use 
 <div class="param">publicationDate </div><div class="param-desc"><span class="param-type"><a href="#date">date</a></span> date the publication was published format: date</div>
 <div class="param">auditorName (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name of auditing company </div>
 <div class="param">snippets (optional)</div><div class="param-desc"><span class="param-type"><a href="#SourceSnippet">array[SourceSnippet]</a></span> excerpts from the original publication containing the financial data </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3><a name="Flag"><code>Flag</code></a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'>risk factor detected for the company</div>
+    <div class="field-items">
+      <div class="param">name </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> name of the flag </div>
+<div class="param">definition </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> criteria for setting the flag </div>
+<div class="param">level </div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> red represents high risk, yellow represents medium risk </div>
+<div class="param">explanation (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> reasoning behind the set flag </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
