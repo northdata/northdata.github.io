@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.236.0
+  version: 1.236.1
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -827,6 +827,9 @@ definitions:
         description: risk flags associated with the company
         items:
           $ref: '#/definitions/Flag'
+      overallRiskLevel:
+        type: string
+        description: green for lowest, yellow for medium, red for high overall risk
       blocked:
         type: boolean
         description: company data should not be publicly on the Internet because of a request for privacy protection
