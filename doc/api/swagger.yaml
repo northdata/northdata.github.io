@@ -1,7 +1,7 @@
 swagger: '2.0'
 info:
   # The version is updated automatically in the release build
-  version: 1.237.1
+  version: 1.238.0
   title: North Data API
   description: Programmatic access to the North Data DB.
   termsOfService: https://www.northdata.de/_agb
@@ -272,7 +272,12 @@ paths:
           type: string
           in: query
         - name: address
-          description: address or geo coordinates
+          description: address
+          required: false
+          type: string
+          in: query
+        - name: coord
+          description: geo-coordinates like "52.520008|13.404954"
           required: false
           type: string
           in: query
@@ -1157,6 +1162,9 @@ definitions:
       value:
         type: string
         description: actual value
+      directMarketingBlock:
+        type: boolean
+        description: true if this extra data item should not be used for marketing purposes (e.g., email address of a person)		
       formattedHtmlValue:
         type: string
         description: value formatted as an HTML string
